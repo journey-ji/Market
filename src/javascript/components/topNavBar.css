@@ -1,0 +1,7 @@
+.top-navbar {
+  width: 1920px;
+  height: 90px;
+  display: flex;
+  padding: 0 320px;
+  background-color: black;
+}
