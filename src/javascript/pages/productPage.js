@@ -1,20 +1,23 @@
 import { ProductCard } from "../components/ProductCard/index.js";
+import Component from "../core/Component.js";
 
-class ProductPage {
+class ProductPage extends Component {
   constructor() {
-    this.mainElement = document.createElement("main");
-    this.product = {};
+    super();
+    this.state = {
+      product: [],
+    };
+    this.getProductData();
   }
 
   async getProductData() {
     const response = await fetch("http://test.api.weniv.co.kr/mall");
     const data = await response.json();
-    this.product = await data;
+    this.setState({ product: data });
   }
 
-  async setProductList() {
-    await this.getProductData();
-    console.log(this.product);
+  render() {
+    this.mainElement = document.createElement("main");
 
     this.mainElement.classList.add("product");
     const productPageHeader = document.createElement("h1");
@@ -23,26 +26,24 @@ class ProductPage {
     this.mainElement.appendChild(productPageHeader);
 
     const productList = document.createElement("ul");
-    productList.setAttribute("class", "product-item");
+    productList.setAttribute("class", "product-list");
 
-    this.mainElement.innerHTML = `
-        <h1 class="ir">상품목록 페이지</h1>
-        <ul class="product-list"></ul>
-    `;
-
-    this.product.forEach(async (item) => {
+    this.state.product.forEach(async (item) => {
+      console.log(item.stockCount);
       const productitem = document.createElement("li");
+
       productitem.setAttribute("class", "product-item");
-      const productCard = new ProductCard(item);
+      if (item.stockCount < 1) {
+        console.log(item.productName);
+        productitem.classList.add("sold-out");
+      }
+
+      const productCard = new ProductCard({ item: item });
       productitem.appendChild(productCard.render());
-      productList.append(productCard.render());
+      productList.appendChild(productitem);
     });
 
     this.mainElement.append(productList);
-    console.log(this.mainElement);
-  }
-  render() {
-    this.setProductList();
     return this.mainElement;
   }
 }

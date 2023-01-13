@@ -1,46 +1,68 @@
-class ProductLikeButton {
-  constructor(id) {
-    this.productId = id;
-    this.liked = this.checkLikList();
+import Component from "../../core/Component.js";
+
+class ProductLikeButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      liked: this.checkLikeList(),
+    };
   }
-  checkLikList() {
+  checkLikeList() {
     if (!localStorage.getItem("likeList")) {
       localStorage.setItem("likeList", JSON.stringify([]));
     }
     const likeList = JSON.parse(localStorage.getItem("likeList"));
 
-    return likeList.includes(this.productId);
+    return likeList.includes(this.props.productId);
   }
-  addClickEvent(likeButton) {
-    likeButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const likeList = JSON.parse(localStorage.getItem("likeList"));
 
-      this.liked = !this.liked;
-      this.liked && likeList.push(this.productId);
-      const newLikeList = this.liked
-        ? likeList
-        : likeList.filter((id) => id != this.productId);
+  changeLiked() {
+    const likeList = JSON.parse(localStorage.getItem("likeList"));
+    if (this.checkLikeList()) {
+      const newLikeList = likeList.filter((id) => id != this.props.productId);
       localStorage.setItem("likeList", JSON.stringify(newLikeList));
-
-      this.liked
-        ? e.target.classList.add("on")
-        : e.target.classList.remove("on");
-      console.log("좋아요버튼 클릭");
-    });
+    } else {
+      likeList.push(this.props.productId);
+      localStorage.setItem("likeList", JSON.stringify(likeList));
+    }
+    this.setState({ liked: this.checkLikeList() });
   }
+
+  // Component 클래스에서는 렌더에서 요소를만들고 컴포넌트를 생성
+  // 요소를 직접 조작하는것은 규칙에 맞지 않는다.
+  // 렌더에서 this.liked에 맞춰 렌더링하자
+  // 클릭했을때는 this.liked 만 바꿔줌
+
+  // const likeList = JSON.parse(localStorage.getItem("likeList"));
+
+  // this.liked = !this.liked;
+  // this.liked && likeList.push(this.props.productId);
+  // const newLikeList = this.liked
+  //   ? likeList
+  //   : likeList.filter((id) => id != this.props.productId);
+  // localStorage.setItem("likeList", JSON.stringify(newLikeList));
+
+  // this.liked
+  //   ? e.target.classList.add("on")
+  //   : e.target.classList.remove("on");
+
   render() {
     const likeButton = document.createElement("button");
     likeButton.setAttribute("class", "like-btn");
-    this.liked && likeButton.classList.add("on");
+    this.state.liked && likeButton.classList.add("on");
 
     const likeButtonIr = document.createElement("span");
     likeButtonIr.setAttribute("class", "ir");
     likeButtonIr.innerText = "좋아요 버튼";
 
     likeButton.appendChild(likeButtonIr);
-    this.addClickEvent(likeButton);
+    likeButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.changeLiked();
+
+      console.log(this.state.liked);
+    });
     return likeButton;
   }
 }
