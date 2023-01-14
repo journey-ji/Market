@@ -21,7 +21,7 @@ class ProductCard extends Component {
       discountRate: this.props.item.discountRate,
     });
     const productLikeButton = new ProductLikeButton({
-      productId: this.props.item.id,
+      id: this.props.item.id,
     });
 
     product.appendChild(productImage.render());
