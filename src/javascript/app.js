@@ -1,4 +1,4 @@
-import { ProductPage, productDetail } from "./pages/index.js";
+import { ProductPage, ProductDetail, TestPage } from "./pages/index.js";
 import { Router } from "./utils/index.js";
 
 export default class App {
@@ -10,9 +10,9 @@ export default class App {
     const router = new Router({
       "/": ProductPage,
       // "/detail": productDetail,
-      "/detail/:id": productDetail,
+      "/detail/:id": ProductDetail,
+      "/test": TestPage,
     });
-
     router.init(el);
   }
 }

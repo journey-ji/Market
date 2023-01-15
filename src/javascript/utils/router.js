@@ -26,11 +26,6 @@ class Router {
     this.routing(window.location.pathname);
 
     window.addEventListener("click", (e) => {
-      // if (e.target.tagName.toLowerCase() === "a") {
-      //   e.preventDefault();
-      //   this.routePush(e.target.href);
-      // }
-
       if (e.target.closest("a")) {
         e.preventDefault();
         this.routePush(e.target.closest("a").href);
@@ -38,6 +33,7 @@ class Router {
     });
     window.onpopstate = () => this.routing(window.location.pathname);
   }
+
   routePush(pathname) {
     window.history.pushState({}, null, pathname);
     this.routing(window.location.pathname);
@@ -60,6 +56,7 @@ class Router {
       this.render(page);
     }
   }
+
   render(page) {
     const rootElement = document.querySelector(this.rootElementId);
     rootElement.innerHTML = "";

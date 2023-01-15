@@ -44,7 +44,7 @@ td {
 
 body,
 html {
-  width: 100%;
+  min-width: 1020px;
   height: 100%;
 }
 

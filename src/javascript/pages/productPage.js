@@ -1,5 +1,6 @@
 import { ProductCard } from "../components/ProductCard/index.js";
 import Component from "../core/Component.js";
+import createComponent from "../core/createComponent.js";
 
 class ProductPage extends Component {
   constructor() {
@@ -18,8 +19,8 @@ class ProductPage extends Component {
 
   render() {
     this.mainElement = document.createElement("main");
-
     this.mainElement.classList.add("product");
+
     const productPageHeader = document.createElement("h1");
     productPageHeader.setAttribute("class", "ir");
     productPageHeader.innerText = "상품목록 페이지";
@@ -38,12 +39,16 @@ class ProductPage extends Component {
         productitem.classList.add("sold-out");
       }
 
-      const productCard = new ProductCard({ item: item });
-      productitem.appendChild(productCard.render());
+      const productCard = createComponent(ProductCard, { item: item });
+      productitem.appendChild(productCard);
       productList.appendChild(productitem);
     });
 
-    this.mainElement.append(productList);
+    const testPage = document.createElement("a");
+    testPage.innerText = "테스트페이지 링크";
+    testPage.setAttribute("href", `/test`);
+
+    this.mainElement.append(productList, testPage);
     return this.mainElement;
   }
 }

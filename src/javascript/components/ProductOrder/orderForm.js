@@ -1,5 +1,5 @@
 import { Component, createComponent } from "../../core/index.js";
-import { QuantityInput } from "./index.js";
+import { OptionSelector, QuantityInput } from "./index.js";
 class OrderForm extends Component {
   constructor(props) {
     super(props);
@@ -45,14 +45,25 @@ class OrderForm extends Component {
 
     const selectedProductContainer = document.createElement("div");
     selectedProductContainer.setAttribute("class", "selected-product");
-    const quantityInput = createComponent(QuantityInput, {
-      ...this.props,
-      quantity: this.state.quantity,
-      increaseQuantity: this.increaseQuantity.bind(this),
-      decreaseQuantity: this.decreaseQuantity.bind(this),
-      onChangeQuantityInput: this.onChangeQuantityInput.bind(this),
-    });
-    selectedProductContainer.append(quantityInput);
+    if (this.props.product.option.length > 0) {
+      // 옵션이 있을 때,
+
+      const optionSelector = createComponent(OptionSelector, {
+        option: this.props.product.option,
+      });
+
+      selectedProductContainer.append(optionSelector);
+    } else {
+      // 옵션이 없을 때,
+      const quantityInput = createComponent(QuantityInput, {
+        ...this.props,
+        quantity: this.state.quantity,
+        increaseQuantity: this.increaseQuantity.bind(this),
+        decreaseQuantity: this.decreaseQuantity.bind(this),
+        onChangeQuantityInput: this.onChangeQuantityInput.bind(this),
+      });
+      selectedProductContainer.append(quantityInput);
+    }
 
     const totalPriceContainer = document.createElement("div");
     totalPriceContainer.setAttribute("class", "total-price");
