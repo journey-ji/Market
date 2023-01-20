@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import "reset.css";
+@import "../javascript/components/MainProduct/mainProduct.css";
 
 :root {
   --main-color: #6327fe;

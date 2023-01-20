@@ -1,0 +1,43 @@
+.ir {
+  /* 스크린 리더가 읽을 수 있도록 */
+  height: 1px;
+  width: 1px;
+
+  /* 레이아웃에 영향을 끼치지 않도록 */
+  position: absolute;
+
+  /* 이하 눈에 보이는 부분을 제거 */
+  overflow: hidden;
+  /* 네개의 좌표로 지정한 직사각형 모양대로 요소를 잘라내는 속성.
+    포토샵의 mask 효과와 같다고 한다.
+    position 속성 값이 absolute 혹은 fixed인 요소여야하고,
+    만약 overflow 속성 값이 visible일 경우에는 적용이 되지 않는다. */
+  clip: rect(1px 1px 1px 1px);
+  /* clip:rect(0 0 0 0);
+    margin 값 -1로 할 경우, 순서가 꼬일 수 있다 */
+  margin: 0;
+  /* + clip-path: inset(50%);
+    + white-space: nowrap; */
+}
+
+.content-wrap {
+  display: grid;
+  grid-row: 1fr 1fr 1fr;
+}
+
+.content-wrap .content-item {
+  width: 380px;
+  height: 490px;
+}
+
+.content-wrap .content-item p {
+  color: #767676;
+  font-size: 16px;
+}
+.content-wrap .content-item h3 {
+  font-size: 18px;
+}
+
+.content-wrap .content-item span {
+  font-size: 24px;
+}

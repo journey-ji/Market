@@ -3,7 +3,7 @@ import MainProduct from "../components/mainProduct/mainProduct.js";
 import TopNavBar from "../components/topNavBar.js";
 import { Component, createComponent } from "../core/index.js";
 
-class TestPage extends Component {
+class MainPage extends Component {
   render() {
     const testContainer = document.createElement("div");
     testContainer.innerText = "테스트 페이지 입니다.";
@@ -16,4 +16,4 @@ class TestPage extends Component {
   }
 }
 
-export default TestPage;
+export default MainPage;

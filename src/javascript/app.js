@@ -1,4 +1,9 @@
-import { ProductPage, ProductDetail, TestPage } from "./pages/index.js";
+import {
+  MainPage,
+  ProductPage,
+  ProductDetail,
+  TestPage,
+} from "./pages/index.js";
 import { Router } from "./utils/index.js";
 
 export default class App {
@@ -8,8 +13,7 @@ export default class App {
   setup() {
     const { el } = this.props;
     const router = new Router({
-      "/": ProductPage,
-      // "/detail": productDetail,
+      "/": MainPage,
       "/detail/:id": ProductDetail,
       "/test": TestPage,
     });
