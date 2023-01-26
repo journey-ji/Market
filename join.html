@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style/style.css" />
+    <link rel="stylesheet" href="src/style/join.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <h1 class="ir header">호두</h1>
+      <article class="join-article">
+        <img src="./src/assets/Logo-hodu.png" alt="메인 로고" class="logo" />
+        <div class="join-wrapper">
+          <div class="join-type-wrapper">
+            <span class="customer-join selected">구매회원 가입</span>
+            <span class="seller-join">판매회원 가입</span>
+          </div>
+          <div class="join-area">
+            <div class="input-wrapper">
+              <span>아이디</span>
+              <div class="id-wrapper">
+                <input type="text" placeholder="아이디" class="id-inp" />
+                <button>중복확인</button>
+              </div>
+              <span>정말 멋진 아이디네요!</span>
+            </div>
+
+            <div class="input-wrapper">
+              <span>비밀번호</span>
+              <input type="password" placeholder="비밀번호" class="pw-inp" />
+            </div>
+            <div class="input-wrapper">
+              <span>비밀번호 재확인</span>
+              <input
+                type="password"
+                placeholder="비밀번호 재확인"
+                class="pw-inp"
+              />
+            </div>
+            <div class="input-wrapper">
+              <span>이름</span>
+              <input type="text" placeholder="이름" class="id-inp" />
+            </div>
+            <div class="input-wrapper">
+              <span>휴대폰번호</span>
+              <div class="phone-wrapper">
+                <select name="sel-num" id="" class="phone-first">
+                  <option value="010">010</option>
+                  <option value="011">011</option>
+                  <option value="016">016</option>
+                  <option value="017">017</option>
+                  <option value="019">019</option>
+                </select>
+                <input type="text" class="phone-input" />
+                <input type="text" class="phone-input" />
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <span>이메일</span>
+              <div class="email-wrapper">
+                <input type="text" name="" id="" class="email-input" />
+                <span>@</span>
+                <input type="text" name="" id="" class="email-input" />
+              </div>
+            </div>
+
+            <!-- 아래는 판매회원여부에 따라 추가 -->
+            <div class="input-wrapper">
+              <span>사업자 등록번호</span>
+              <div class="ent-wrapper">
+                <input type="text" class="ent-input" />
+                <button class="">인증</button>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <span>스토어 이름</span>
+              <input type="text" />
+            </div>
+          </div>
+          <div class="terms-wrapper">
+            <input type="checkbox" />
+            <span
+              >호두샵의 이용약관 및 개인정보처리방침에 대한 내용을 확인하였고
+              동의합니다.</span
+            >
+          </div>
+          <button type="button" class="join-btn">가입하기</button>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

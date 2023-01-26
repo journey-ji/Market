@@ -1,0 +1,111 @@
+html {
+  height: 2000px;
+}
+.login-article {
+  width: 550px;
+}
+.logo {
+  display: block;
+  width: 238px;
+  height: 74px;
+  margin: 70px auto;
+}
+.login-wrapper {
+  width: 550px;
+  height: 352px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-wrapper .login-type-wrapper {
+  width: 100%;
+  height: 60px;
+  display: flex;
+}
+.login-wrapper .login-type-wrapper .customer-login,
+.login-wrapper .login-type-wrapper .seller-login {
+  width: 275px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid #c4c4c4;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #f2f2f2;
+  border-bottom: none;
+  z-index: -100;
+}
+
+.login-wrapper .login-type-wrapper .customer-login.selected,
+.login-wrapper .login-type-wrapper .seller-login.selected {
+  background-color: white;
+  z-index: 30;
+  border-bottom: none;
+  height: 61px;
+}
+.login-area {
+  padding: 35px;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  box-sizing: border-box;
+  z-index: 20;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: white;
+}
+
+.id-inp,
+.pw-inp {
+  height: 60px;
+  outline: none;
+  border-style: none;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.login-btn {
+  height: 60px;
+  background-color: #21bf48;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+.etc-wrapper {
+  margin-top: 60px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.etc-wrapper a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 10px;
+}
+
+/* 
+    <main>
+      <h1 class = 'ir header'>호두</h1>
+      <div class='login-wrapper'>
+        <div class='login-type-wrapper'>  
+          <span class='customer-login'>구매회원 로그인</span>
+          <span class='seller-login'>판매회원 로그인</span>
+        </div>
+        <div class='login-area'>
+          <input type="text" placeholder="아이디" />
+          <input type="text" placeholder="비밀번호" />
+          <button type="button">로그인</button>
+        </div>
+      </div>
+      <div class="etc-wrapper">
+        <a href="">회원가입</a>
+        <a href="">비밀번호 찾기</a>
+      </div>
+    </main>
+     */
