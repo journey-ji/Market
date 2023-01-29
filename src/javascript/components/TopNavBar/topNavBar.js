@@ -1,9 +1,12 @@
-import { Component } from "../core/index.js";
+import { Component } from "../../core/index.js";
 
 class TopNavBar extends Component {
   render() {
     const $navCont = document.createElement("nav");
     $navCont.classList.add("top-navbar");
+
+    const $navWrapper = document.createElement("div");
+    $navWrapper.classList.add("nav-wrapper");
 
     const leftCont = document.createElement("div");
     leftCont.setAttribute("class", "left-cont");
@@ -48,7 +51,8 @@ class TopNavBar extends Component {
 
     rightCont.append(btnCont, btnCont2);
 
-    $navCont.append(leftCont, rightCont);
+    $navWrapper.append(leftCont, rightCont);
+    $navCont.append($navWrapper);
     return $navCont;
   }
 }

@@ -1,4 +1,7 @@
-import { Component } from "../../core/index.js";
+import { Component, createComponent } from "../../core/index.js";
+import ProductName from "../Product/productName.js";
+import ProductPrice from "../Product/productPrice.js";
+import getProductsAPI from "./api.js";
 
 class MainProduct extends Component {
   getDataAPI() {}
@@ -12,22 +15,43 @@ class MainProduct extends Component {
     contentHeaderIr.innerText = "상품 목록";
     contentHeaderIr.setAttribute("class", "ir");
     const ulContainer = document.createElement("ul");
+    ulContainer.setAttribute("class", "main-product-list");
 
-    const productContainer = document.createElement("li");
-    productContainer.setAttribute("class", "content-item");
+    const setProducts = () => {
+      getProductsAPI().then((data) => {
+        console.log(data.results);
+        for (let i = 0; i < data.results.length; i++) {
+          const productContainer = document.createElement("li");
+          productContainer.setAttribute("class", "content-item");
 
-    const $img = document.createElement("img");
+          const productAnchor = document.createElement("a");
+          productAnchor.setAttribute(
+            "href",
+            `/products/${data.results[i].product_id}`
+          );
 
-    const $seller = document.createElement("p");
-    $seller.innerText = "판매처";
+          const $img = document.createElement("img");
+          $img.setAttribute("src", data.results[i].image);
 
-    const $itemHeaderIr = document.createElement("h3");
-    $itemHeaderIr.innerText = "상품이름";
+          const $seller = document.createElement("p");
+          $seller.innerText = data.results[i].store_name;
 
-    const $price = document.createElement("span");
-    $price.innerText = "가격";
+          const $itemHeaderIr = createComponent(ProductName, {
+            name: data.results[i].product_name,
+          });
 
-    ulContainer.append(productContainer, $img, $seller, $itemHeaderIr, $price);
+          const $price = createComponent(ProductPrice, {
+            price: data.results[i].price,
+          });
+
+          productAnchor.append($img, $seller, $itemHeaderIr, $price);
+          productContainer.append(productAnchor);
+          ulContainer.append(productContainer);
+        }
+      });
+    };
+    setProducts();
+    for (let i = 0; i < 15; i++) {}
     contentWrap.append(contentHeaderIr, ulContainer);
     return contentWrap;
   }

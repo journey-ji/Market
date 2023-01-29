@@ -22,22 +22,45 @@
 
 .content-wrap {
   display: grid;
+  width: 1280px;
   grid-row: 1fr 1fr 1fr;
+  margin: 80px auto 160px;
 }
 
 .content-wrap .content-item {
   width: 380px;
   height: 490px;
 }
-
+.content-wrap .content-item a {
+  cursor: pointer;
+}
+.content-wrap .content-item img {
+  width: 380px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 10px;
+}
 .content-wrap .content-item p {
   color: #767676;
   font-size: 16px;
+  margin-top: 16px;
 }
 .content-wrap .content-item h3 {
   font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 10px 0;
 }
 
 .content-wrap .content-item span {
   font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.main-product-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  gap: 70px;
 }

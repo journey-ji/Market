@@ -9,7 +9,7 @@ class OrderForm extends Component {
   }
   increaseQuantity() {
     const newQuantity = this.state.quantity + 1;
-    if (newQuantity > this.props.product.stockCount) return;
+    if (newQuantity > this.props.product.stock) return;
     this.setState({ quantity: newQuantity });
   }
   decreaseQuantity() {
@@ -18,7 +18,7 @@ class OrderForm extends Component {
     this.setState({ quantity: newQuantity });
   }
   onChangeQuantityInput(e) {
-    const maxQuantity = this.props.product.stockCount;
+    const maxQuantity = this.props.product.stock;
     const newQuantity = Number(e.target.value);
     if (newQuantity > maxQuantity) {
       this.setState({ quantity: maxQuantity });
@@ -38,32 +38,22 @@ class OrderForm extends Component {
     const deliveryTitle = document.createElement("span");
     deliveryTitle.setAttribute("class", "delivery-title");
     deliveryTitle.innerText = `택배 배송 / ${
-      this.props.product.shippingFee > 0
-        ? this.props.product.shippingFee.toLocaleString("ko-KR") + "원"
+      this.props.product.shipping_fee > 0
+        ? this.props.product.shipping_fee.toLocaleString("ko-KR") + "원"
         : "무료 배송"
     }`;
 
     const selectedProductContainer = document.createElement("div");
     selectedProductContainer.setAttribute("class", "selected-product");
-    if (this.props.product.option.length > 0) {
-      // 옵션이 있을 때,
 
-      const optionSelector = createComponent(OptionSelector, {
-        option: this.props.product.option,
-      });
-
-      selectedProductContainer.append(optionSelector);
-    } else {
-      // 옵션이 없을 때,
-      const quantityInput = createComponent(QuantityInput, {
-        ...this.props,
-        quantity: this.state.quantity,
-        increaseQuantity: this.increaseQuantity.bind(this),
-        decreaseQuantity: this.decreaseQuantity.bind(this),
-        onChangeQuantityInput: this.onChangeQuantityInput.bind(this),
-      });
-      selectedProductContainer.append(quantityInput);
-    }
+    const quantityInput = createComponent(QuantityInput, {
+      ...this.props,
+      quantity: this.state.quantity,
+      increaseQuantity: this.increaseQuantity.bind(this),
+      decreaseQuantity: this.decreaseQuantity.bind(this),
+      onChangeQuantityInput: this.onChangeQuantityInput.bind(this),
+    });
+    selectedProductContainer.append(quantityInput);
 
     const totalPriceContainer = document.createElement("div");
     totalPriceContainer.setAttribute("class", "total-price");

@@ -11,7 +11,7 @@ class ProductBasicInfo extends Component {
       text: "기본 정보 및 상품 옵션",
     });
     const productImage = createComponent(ProductImage, {
-      src: this.props.product.thumbnailImg,
+      src: this.props.product.image,
     });
 
     const productInfoContainer = document.createElement("div");
@@ -21,11 +21,11 @@ class ProductBasicInfo extends Component {
     productNamePriceContainer.setAttribute("class", "product-name-price");
 
     const productName = createComponent(ProductName, {
-      name: this.props.product.productName,
+      name: this.props.product.product_name,
     });
     const productPrice = createComponent(ProductPrice, {
       price: this.props.product.price,
-      discountRate: this.props.product.discountRate,
+      discountRate: null,
     });
 
     productNamePriceContainer.append(productName, productPrice);

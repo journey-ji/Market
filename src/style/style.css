@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import "reset.css";
 @import "../javascript/components/MainProduct/mainProduct.css";
+@import "../javascript/components/TopNavBar/topNavBar.css";
 
 :root {
   --main-color: #6327fe;
@@ -46,7 +47,6 @@ td {
 body,
 html {
   min-width: 1020px;
-  height: 100%;
 }
 
 body,
@@ -239,6 +239,7 @@ tr {
 .product-name {
   font-size: 18px;
   line-height: 22px;
+  margin: 10px 0;
 }
 
 /* 상품 가격 스타일 */

@@ -1,8 +1,8 @@
 import {
   MainPage,
-  ProductPage,
   ProductDetail,
-  TestPage,
+  ProductDetail2,
+  ProductPage,
 } from "./pages/index.js";
 import { Router } from "./utils/index.js";
 
@@ -15,7 +15,8 @@ export default class App {
     const router = new Router({
       "/": MainPage,
       "/detail/:id": ProductDetail,
-      "/test": TestPage,
+      "/products/:id": ProductDetail2,
+      "/test": ProductPage,
     });
     router.init(el);
   }
