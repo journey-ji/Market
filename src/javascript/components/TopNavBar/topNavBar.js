@@ -12,7 +12,10 @@ class TopNavBar extends Component {
     leftCont.setAttribute("class", "left-cont");
 
     const headerLogo = document.createElement("img");
-    headerLogo.setAttribute("src", "src/assets/Logo-hodu.png");
+    headerLogo.setAttribute(
+      "src",
+      `${window.location.origin}/src/assets/Logo-hodu.png`
+    );
     headerLogo.setAttribute("alt", "헤더로고");
     headerLogo.setAttribute("class", "logo-img");
 

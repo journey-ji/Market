@@ -34,7 +34,7 @@ class ProductDetail2 extends Component {
         product: this.state.product,
       });
 
-      pageContainer.append(productBasicInfo);
+      orderWrapper.append(productBasicInfo);
     }
 
     pageContainer.append(topNavBar, orderWrapper);
