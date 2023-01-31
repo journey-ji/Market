@@ -1,3 +1,4 @@
+import Button from "../components/Button/Button.js";
 import { ProductBasicInfo } from "../components/ProductDetail/index.js";
 import TopNavBar from "../components/TopNavBar/topNavBar.js";
 import { Component, createComponent } from "../core/index.js";
@@ -37,7 +38,37 @@ class ProductDetail2 extends Component {
       orderWrapper.append(productBasicInfo);
     }
 
-    pageContainer.append(topNavBar, orderWrapper);
+    const menubar = document.createElement("div");
+    menubar.setAttribute("class", "menu-wrapper");
+
+    const menuBtns = document.createElement("section");
+    menuBtns.setAttribute("class", "menu-btn");
+
+    const btn1 = createComponent(Button, {
+      width: "320px",
+      height: "60px",
+      txt: "상세",
+      class: "selected",
+    });
+    const btn2 = createComponent(Button, {
+      width: "320px",
+      height: "60px",
+      txt: "리뷰",
+    });
+    const btn3 = createComponent(Button, {
+      width: "320px",
+      height: "60px",
+      txt: "Q&A",
+    });
+    const btn4 = createComponent(Button, {
+      width: "320px",
+      height: "60px",
+      txt: "반품/교환정보",
+    });
+
+    menuBtns.append(btn1, btn2, btn3, btn4);
+    menubar.append(menuBtns);
+    pageContainer.append(topNavBar, orderWrapper, menubar);
     return pageContainer;
   }
 }

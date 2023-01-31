@@ -85,8 +85,21 @@ class OrderForm extends Component {
 
     totalPriceContainer.append(totalPriceTitle, totalOrderInfo);
 
+    const btnsContainer = document.createElement("div");
+    btnsContainer.setAttribute("class", "buy-container");
+    const buyBtn = document.createElement("button");
+    buyBtn.setAttribute("class", "buy-btn");
+
+    buyBtn.innerText = "바로 구매";
+
+    btnsContainer.append(buyBtn);
+
     productOptionContainer.append(deliveryTitle, selectedProductContainer);
-    orderForm.append(productOptionContainer, totalPriceContainer);
+    orderForm.append(
+      productOptionContainer,
+      totalPriceContainer,
+      btnsContainer
+    );
     return orderForm;
   }
 }
