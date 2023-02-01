@@ -29,13 +29,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "common.css",
     }),
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
   ],
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, "dist"),
     },
     port: 8080,
-    historyApiFallback: true,
   },
 };

@@ -1,5 +1,5 @@
 import { Component } from "../../core/index.js";
-
+import "./mainCarousel.css";
 class MainCarousel extends Component {
   render() {
     const carouselContainer = document.createElement("article");
