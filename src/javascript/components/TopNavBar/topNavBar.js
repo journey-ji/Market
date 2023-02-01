@@ -1,4 +1,5 @@
 import { Component } from "../../core/index.js";
+import logo from "../../../assets/Logo-hodu.png";
 
 class TopNavBar extends Component {
   render() {
@@ -12,10 +13,7 @@ class TopNavBar extends Component {
     leftCont.setAttribute("class", "left-cont");
 
     const headerLogo = document.createElement("img");
-    headerLogo.setAttribute(
-      "src",
-      `${window.location.origin}/src/assets/Logo-hodu.png`
-    );
+    headerLogo.setAttribute("src", logo);
     headerLogo.setAttribute("alt", "헤더로고");
     headerLogo.setAttribute("class", "logo-img");
 

@@ -24,7 +24,9 @@ class Router {
     this.rootElementId = rootElementId;
 
     this.routing(window.location.pathname);
-
+    window.addEventListener("DOMContentLoaded", () => {
+      console.log("fwef");
+    });
     window.addEventListener("click", (e) => {
       if (e.target.closest("a")) {
         e.preventDefault();

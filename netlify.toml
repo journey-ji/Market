@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "https://super-crisp-7daed2.netlify.app/*"
+  to = "https://super-crisp-7daed2.netlify.app/"
+  status = 200

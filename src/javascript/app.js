@@ -17,6 +17,7 @@ export default class App {
       "/detail/:id": ProductDetail,
       "/products/:id": ProductDetail2,
       "/test": ProductPage,
+      "/*": MainPage,
     });
     router.init(el);
   }
