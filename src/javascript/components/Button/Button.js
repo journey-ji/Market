@@ -5,7 +5,7 @@ class Button extends Component {
     const btn = document.createElement("button");
     btn.style.width = this.props.width;
     btn.style.height = this.props.height;
-    btn.innerText = this.props.txt;
+    btn.innerText = this.props.txt ? this.props.txt : "";
     btn.setAttribute("class", this.props.class);
     return btn;
   }

@@ -7,7 +7,7 @@ class MainPage extends Component {
   render() {
     const pageContainer = document.createElement("div");
 
-    const topNavBar = createComponent(TopNavBar);
+    const topNavBar = createComponent(TopNavBar, { isSeller: false });
     const mainCarousel = createComponent(MainCarousel);
     const mainProducts = createComponent(MainProduct);
     pageContainer.append(topNavBar, mainCarousel, mainProducts);

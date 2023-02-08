@@ -25,7 +25,9 @@ class ProductDetail2 extends Component {
     const pageContainer = document.createElement("div");
     pageContainer.setAttribute("class", "page-wrapper");
 
-    const topNavBar = createComponent(TopNavBar);
+    const topNavBar = createComponent(TopNavBar, {
+      isSeller: false,
+    });
     const orderWrapper = document.createElement("div");
     orderWrapper.setAttribute("class", "order-wrapper");
 

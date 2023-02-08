@@ -33,6 +33,9 @@ class Router {
         this.routePush(e.target.closest("a").href);
       }
     });
+    window.addEventListener("locationchange", (e) => {
+      console.log("hihi");
+    });
     window.onpopstate = () => this.routing(window.location.pathname);
   }
 
