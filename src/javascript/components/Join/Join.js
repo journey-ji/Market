@@ -1,8 +1,24 @@
 import { Component, createComponent } from "../../core";
 import Input from "../Input/Input";
+import EmailChk from "./EmailChk";
 import PasswordChk from "./PasswordChk";
+import PhoneChk from "./PhoneChk";
 
 class Join extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "",
+      idChk: false,
+      pw: "",
+      pw2: "",
+      pwChk: "",
+      name: "",
+      phone: ["", "", ""],
+      emailId: "",
+      emailHost: "",
+    };
+  }
   render() {
     const joinContainer = document.createElement("article");
     joinContainer.setAttribute("class", "join-form");
@@ -28,26 +44,36 @@ class Join extends Component {
 
     const idInputWrapper = createComponent(Input, {
       txt: "아이디",
+      value: this.state.id,
       type: "id",
       class: "id-inp",
+      info: this.state,
+      setInfo: this.setState.bind(this),
     });
 
-    const pwDiv = createComponent(PasswordChk);
+    const pwDiv = createComponent(PasswordChk, {
+      info: this.state,
+      setInfo: this.setState.bind(this),
+    });
+
     const nameInputWrapper = createComponent(Input, {
       txt: "이름",
-      type: "basic",
+      type: "name",
       class: "id-inp",
+      info: this.state,
+      value: this.state.name,
+      setInfo: this.setState.bind(this),
     });
 
-    const phoneInputWrapper = createComponent(Input, {
-      txt: "휴대폰 번호",
-      type: "phone",
+    const phoneInputWrapper = createComponent(PhoneChk, {
+      info: this.state,
+      setInfo: this.setState.bind(this),
     });
-    const emailInputWrapper = createComponent(Input, {
-      txt: "이메일",
-      type: "email",
-      class: "email-inp",
+    const emailInputWrapper = createComponent(EmailChk, {
+      info: this.state,
+      setInfo: this.setState.bind(this),
     });
+
     joinArea.append(
       idInputWrapper,
       pwDiv,
@@ -70,6 +96,10 @@ class Join extends Component {
     joinBtn.setAttribute("class", "join-btn");
     joinBtn.setAttribute("type", "button");
     joinBtn.innerText = "가입하기";
+    joinBtn.addEventListener("click", (e) => {
+      e.defaultPrevented;
+      console.log(this.state);
+    });
 
     joinWrapper.append(joinTypeWrapper, joinArea, termsWrapper, joinBtn);
     joinContainer.append(joinWrapper);

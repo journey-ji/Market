@@ -12,24 +12,32 @@ import "./Input.css";
  */
 
 class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: "",
-      isOk: false,
-    };
-  }
   onClickChkId() {
-    idCheckAPI(this.state.id).then((data) => {
+    idCheckAPI(this.props.value).then((data) => {
+      console.log(data);
       if (data?.Success) {
-        this.setState({ id: this.state.id, isOk: true });
+        this.props.setInfo({ ...this.props.info, idChk: true });
       }
     });
   }
   onChangeIdInput() {
-    const target = document.querySelector(".id-inp");
-    this.setState({ id: target.value, isOk: this.state.isOk });
+    // const target = document.querySelector(".id-inp");
+    this.props.setInfo({ ...this.props.info, id: event.target.value });
   }
+
+  onChangeEmailIdInput() {
+    const target = document.querySelector(".emailId-input");
+    this.props.setInfo({ ...this.props.info, emailId: target.value });
+  }
+  onChangeEmailHostInput() {
+    const target = document.querySelector(".emailHost-input");
+    this.props.setInfo({ ...this.props.info, emailHost: target.value });
+  }
+  onChangeNameInp() {
+    console.log("hi");
+    this.props.setInfo({ ...this.props.info, name: event.target.value });
+  }
+
   render() {
     const inputWrapper = document.createElement("div");
     inputWrapper.setAttribute("class", "input-wrapper");
@@ -38,7 +46,7 @@ class Input extends Component {
       span.innerText = this.props?.txt;
       const input = document.createElement("input");
       input.setAttribute("class", this.props.class);
-      input.value = this.props?.value || "";
+      input.value = this.props.value || "";
 
       inputWrapper.append(span, input);
     } else if (this.props.type === "id") {
@@ -47,7 +55,7 @@ class Input extends Component {
       const idWrapper = document.createElement("div");
       idWrapper.setAttribute("class", "id-wrapper");
       const idInp = document.createElement("input");
-      idInp.value = this.state.id;
+      idInp.value = this.props.value;
       idInp.setAttribute("class", "id-inp");
       idInp.addEventListener("change", this.onChangeIdInput.bind(this));
       const overlapBtn = document.createElement("button");
@@ -56,7 +64,7 @@ class Input extends Component {
 
       idWrapper.append(idInp, overlapBtn);
       const txtSpan = document.createElement("span");
-      txtSpan.innerText = this.state.isOk ? "멋진 아이디네요!!" : "";
+      txtSpan.innerText = this.props.info.idChk ? "멋진 아이디네요!!" : "";
       inputWrapper.append(idSpan, idWrapper, txtSpan);
     } else if (this.props.type === "phone") {
       const span = document.createElement("span");
@@ -73,13 +81,24 @@ class Input extends Component {
         opt.innerText = item;
         phoneFirst.append(opt);
       });
+      phoneFirst.addEventListener("change", this.props.onChange);
+      phoneFirst.setAttribute("id", "first");
+      phoneFirst.value = this.props.info.phone[0] || this.props.phoneInfo.first;
+
       const phoneSecond = document.createElement("input");
       phoneSecond.setAttribute("type", "text");
-      phoneSecond.setAttribute("class", "phone-input");
+      phoneSecond.setAttribute("class", "second phone-input");
+      phoneSecond.addEventListener("change", this.props.onChange);
+      phoneSecond.setAttribute("id", "second");
+      phoneSecond.value =
+        this.props.info.phone[1] || this.props.phoneInfo.second;
 
       const phoneThird = document.createElement("input");
       phoneThird.setAttribute("type", "text");
-      phoneThird.setAttribute("class", "phone-input");
+      phoneThird.setAttribute("class", "third phone-input");
+      phoneThird.addEventListener("change", this.props.onChange);
+      phoneThird.setAttribute("id", "third");
+      phoneThird.value = this.props.info.phone[2] || this.props.phoneInfo.third;
 
       phoneWrapper.append(phoneFirst, phoneSecond, phoneThird);
       inputWrapper.append(span, phoneWrapper);
@@ -91,17 +110,34 @@ class Input extends Component {
 
       const emailFirst = document.createElement("input");
       emailFirst.setAttribute("type", "text");
-      emailFirst.setAttribute("class", "email-input");
-
+      emailFirst.setAttribute("class", "emailId-input email-input");
+      emailFirst.addEventListener(
+        "change",
+        this.onChangeEmailIdInput.bind(this)
+      );
+      emailFirst.value = this.props.info?.emailId || "";
       const alpha = document.createElement("span");
       alpha.innerText = "@";
 
       const emailSecond = document.createElement("input");
       emailSecond.setAttribute("type", "text");
-      emailSecond.setAttribute("class", "email-input");
-
+      emailSecond.setAttribute("class", "emailHost-input email-input");
+      emailSecond.addEventListener(
+        "change",
+        this.onChangeEmailHostInput.bind(this)
+      );
+      emailSecond.value = this.props.info?.emailHost || "";
       emailWrapper.append(emailFirst, alpha, emailSecond);
       inputWrapper.append(span, emailWrapper);
+    } else if (this.props.type === "name") {
+      const span = document.createElement("span");
+      span.innerText = this.props?.txt;
+      const input = document.createElement("input");
+      input.setAttribute("class", this.props.class);
+      input.value = this.props.value || "";
+      input.addEventListener("change", this.onChangeNameInp.bind(this));
+
+      inputWrapper.append(span, input);
     }
 
     return inputWrapper;
