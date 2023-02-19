@@ -34,19 +34,54 @@ class Input extends Component {
     this.props.setInfo({ ...this.props.info, emailHost: target.value });
   }
   onChangeNameInp() {
-    console.log("hi");
     this.props.setInfo({ ...this.props.info, name: event.target.value });
   }
 
+  onChangePhoneInp() {
+    if (event.target.id === "first") {
+      this.props.setInfo({
+        ...this.props.info,
+        phone: {
+          ...this.props.info.phone,
+          first: event.target.value,
+        },
+      });
+    } else if (event.target.id === "second") {
+      this.props.setInfo({
+        ...this.props.info,
+        phone: {
+          ...this.props.info.phone,
+          second: event.target.value,
+        },
+      });
+    } else if (event.target.id === "third") {
+      this.props.setInfo({
+        ...this.props.info,
+        phone: {
+          ...this.props.info.phone,
+          third: event.target.value,
+        },
+      });
+    }
+  }
+
+  async onChangePwInp() {
+    if (event.target.id === "pw") {
+      await this.props.setInfo({ ...this.props.info, pw: event.target.value });
+    } else if (event.target.id === "pwChk") {
+      await this.props.setInfo({ ...this.props.info, pw2: event.target.value });
+    }
+  }
   render() {
     const inputWrapper = document.createElement("div");
     inputWrapper.setAttribute("class", "input-wrapper");
+
     if (this.props.type === "basic") {
       const span = document.createElement("span");
       span.innerText = this.props?.txt;
       const input = document.createElement("input");
       input.setAttribute("class", this.props.class);
-      input.value = this.props.value || "";
+      input.value = this.props.info.pw || "";
 
       inputWrapper.append(span, input);
     } else if (this.props.type === "id") {
@@ -55,7 +90,7 @@ class Input extends Component {
       const idWrapper = document.createElement("div");
       idWrapper.setAttribute("class", "id-wrapper");
       const idInp = document.createElement("input");
-      idInp.value = this.props.value;
+      idInp.value = this.props.info.id;
       idInp.setAttribute("class", "id-inp");
       idInp.addEventListener("change", this.onChangeIdInput.bind(this));
       const overlapBtn = document.createElement("button");
@@ -83,22 +118,24 @@ class Input extends Component {
       });
       phoneFirst.addEventListener("change", this.props.onChange);
       phoneFirst.setAttribute("id", "first");
-      phoneFirst.value = this.props.info.phone[0] || this.props.phoneInfo.first;
+      phoneFirst.value = this.props.info.phone.first;
+      phoneFirst.addEventListener("change", this.onChangePhoneInp.bind(this));
 
       const phoneSecond = document.createElement("input");
       phoneSecond.setAttribute("type", "text");
       phoneSecond.setAttribute("class", "second phone-input");
       phoneSecond.addEventListener("change", this.props.onChange);
       phoneSecond.setAttribute("id", "second");
-      phoneSecond.value =
-        this.props.info.phone[1] || this.props.phoneInfo.second;
+      phoneSecond.value = this.props.info.phone.second || "";
+      phoneSecond.addEventListener("change", this.onChangePhoneInp.bind(this));
 
       const phoneThird = document.createElement("input");
       phoneThird.setAttribute("type", "text");
       phoneThird.setAttribute("class", "third phone-input");
       phoneThird.addEventListener("change", this.props.onChange);
       phoneThird.setAttribute("id", "third");
-      phoneThird.value = this.props.info.phone[2] || this.props.phoneInfo.third;
+      phoneThird.value = this.props.info.phone.third || "";
+      phoneThird.addEventListener("change", this.onChangePhoneInp.bind(this));
 
       phoneWrapper.append(phoneFirst, phoneSecond, phoneThird);
       inputWrapper.append(span, phoneWrapper);
@@ -136,6 +173,20 @@ class Input extends Component {
       input.setAttribute("class", this.props.class);
       input.value = this.props.value || "";
       input.addEventListener("change", this.onChangeNameInp.bind(this));
+
+      inputWrapper.append(span, input);
+    } else if (this.props.type === "pw") {
+      const span = document.createElement("span");
+      span.innerText = this.props?.txt;
+      const input = document.createElement("input");
+      input.setAttribute("class", this.props.class);
+      input.setAttribute("id", this.props.id);
+      if (this.props.id === "pw") {
+        input.value = this.props.info.pw || "";
+      } else {
+        input.value = this.props.info.pw2 || "";
+      }
+      input.addEventListener("blur", this.onChangePwInp.bind(this));
 
       inputWrapper.append(span, input);
     }

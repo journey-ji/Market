@@ -78,9 +78,14 @@ input {
 .id-wrapper {
   width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.id-inp-wrapper {
+  display: flex;
   gap: 12px;
 }
-.id-wrapper input {
+.id-inp-wrapper input {
   width: 346px;
 }
 .id-wrapper button {
@@ -92,11 +97,27 @@ input {
   font-weight: bold;
 }
 
+.pw-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.name-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .phone-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.phone-inp-wrapper {
   display: flex;
   gap: 12px;
 }
-.phone-wrapper .phone-input {
+.phone-inp-wrapper .phone-input .phone-inp-wrapper select {
   width: 152px;
 }
 .phone-first {
@@ -110,10 +131,16 @@ input {
 
 .email-wrapper {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.email-inp-wrapper {
+  display: flex;
   align-items: center;
   gap: 11px;
 }
-.email-wrapper .email-input {
+.email-inp-wrapper input {
   width: 220px;
 }
 .ent-wrapper {

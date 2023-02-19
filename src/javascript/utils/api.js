@@ -1,5 +1,6 @@
 export const idCheckAPI = async (id) => {
   console.log(id);
+
   const response = await fetch(
     `https://openmarket.weniv.co.kr/accounts/signup/valid/username/`,
     {

@@ -1,27 +1,23 @@
-import { Component, createComponent } from "../../core";
-import Input from "../Input/Input";
-import EmailChk from "./EmailChk";
-import PasswordChk from "./PasswordChk";
-import PhoneChk from "./PhoneChk";
+import { Component, createComponent } from "../../core/index.js";
+import { idCheckAPI } from "../../utils/api.js";
+import Button from "../Button/Button.js";
 
 class Join extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
       idChk: false,
-      pw: "",
-      pw2: "",
-      pwChk: "",
-      name: "",
-      phone: ["", "", ""],
-      emailId: "",
-      emailHost: "",
+      termChk: false,
     };
   }
   render() {
-    const joinContainer = document.createElement("article");
+    let chkList = {
+      id: false,
+      pw: false,
+    };
+    const joinContainer = document.createElement("form");
     joinContainer.setAttribute("class", "join-form");
+
     const headLogo = document.createElement("img");
     headLogo.setAttribute("class", "logo");
     const joinWrapper = document.createElement("div");
@@ -42,50 +38,114 @@ class Join extends Component {
     const joinArea = document.createElement("div");
     joinArea.setAttribute("class", "join-area");
 
-    const idInputWrapper = createComponent(Input, {
-      txt: "아이디",
-      value: this.state.id,
-      type: "id",
-      class: "id-inp",
-      info: this.state,
-      setInfo: this.setState.bind(this),
+    const idWrapper = document.createElement("div");
+    idWrapper.setAttribute("class", "id-wrapper");
+    const idLabel = document.createElement("label");
+    idLabel.innerText = "아이디";
+
+    const idInpWrapper = document.createElement("div");
+    idInpWrapper.setAttribute("class", "id-inp-wrapper");
+    const idInp = document.createElement("input");
+    idInp.id = "id";
+    idInp.disabled = this.state.idChk ? true : false;
+    const idChkBtn = createComponent(Button, { txt: "중복확인" });
+    idChkBtn.setAttribute("type", "button");
+    idChkBtn.addEventListener("click", (e) => {
+      const idInp = document.querySelector("#id");
+      idCheckAPI(idInp.value).then((res) => {
+        console.log(res);
+        if (res.Success) {
+          alert(res.Success);
+          idInp.disabled = true;
+        } else if (res.FAIL_Message) {
+          alert(res.FAIL_Message);
+        }
+      });
     });
 
-    const pwDiv = createComponent(PasswordChk, {
-      info: this.state,
-      setInfo: this.setState.bind(this),
-    });
+    idInpWrapper.append(idInp, idChkBtn);
+    idWrapper.append(idLabel, idInpWrapper);
 
-    const nameInputWrapper = createComponent(Input, {
-      txt: "이름",
-      type: "name",
-      class: "id-inp",
-      info: this.state,
-      value: this.state.name,
-      setInfo: this.setState.bind(this),
-    });
+    const pwWrapper = document.createElement("div");
+    pwWrapper.setAttribute("class", "pw-wrapper");
+    const pwLabel = document.createElement("label");
+    pwLabel.innerText = "비밀번호";
+    const pwInp = document.createElement("input");
+    pwInp.setAttribute("class", "pw-inp");
+    pwInp.id = "pw";
+    const pwChkLabel = document.createElement("label");
+    pwChkLabel.innerText = "비밀번호 확인";
+    const pwChkInp = document.createElement("input");
+    pwChkInp.id = "pwChk";
+    pwWrapper.append(pwLabel, pwInp, pwChkLabel, pwChkInp);
 
-    const phoneInputWrapper = createComponent(PhoneChk, {
-      info: this.state,
-      setInfo: this.setState.bind(this),
+    const nameWrapper = document.createElement("div");
+    nameWrapper.setAttribute("class", "name-wrapper");
+    const nameLabel = document.createElement("label");
+    nameLabel.innerText = "이름";
+    const nameInp = document.createElement("input");
+    nameInp.id = "name";
+    nameInp.addEventListener("change", () => {});
+    nameWrapper.append(nameLabel, nameInp);
+
+    const phoneWrapper = document.createElement("div");
+    phoneWrapper.setAttribute("class", "phone-wrapper");
+
+    const phoneLabel = document.createElement("label");
+    phoneLabel.innerText = "휴대폰번호";
+    const phoneInp = document.createElement("input");
+    phoneInp.id = "phone";
+    phoneInp.addEventListener("input", (e) => {
+      const regex = /^[0-9\b -]{0,13}$/;
+      if (!regex.test(e.target.value)) {
+        e.target.value = e.target.value.slice(0, -1);
+      }
+      if (e.target.value.length === 10) {
+        e.target.value = e.target.value.replace(
+          /(\d{3})(\d{3})(\d{4})/,
+          "$1-$2-$3"
+        );
+      } else if (e.target.value.length === 13) {
+        e.target.value = e.target.value
+          .replace(/-/g, "")
+          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+      }
     });
-    const emailInputWrapper = createComponent(EmailChk, {
-      info: this.state,
-      setInfo: this.setState.bind(this),
-    });
+    phoneWrapper.append(phoneLabel, phoneInp);
+
+    const emailWrapper = document.createElement("div");
+    emailWrapper.setAttribute("class", "email-wrapper");
+    const emailLabel = document.createElement("label");
+    emailLabel.innerText = "이메일";
+    const emailInpWrapper = document.createElement("div");
+    emailInpWrapper.setAttribute("class", "email-inp-wrapper");
+    const emailIdInp = document.createElement("input");
+    emailIdInp.id = "emailId";
+    const emailSpan = document.createElement("span");
+    emailSpan.innerText = "@";
+    const emailHostInp = document.createElement("input");
+    emailHostInp.id = "emailHost";
+
+    emailInpWrapper.append(emailIdInp, emailSpan, emailHostInp);
+
+    emailWrapper.append(emailLabel, emailInpWrapper);
 
     joinArea.append(
-      idInputWrapper,
-      pwDiv,
-      nameInputWrapper,
-      phoneInputWrapper,
-      emailInputWrapper
+      idWrapper,
+      pwWrapper,
+      nameWrapper,
+      phoneWrapper,
+      emailWrapper
     );
 
     const termsWrapper = document.createElement("div");
     termsWrapper.setAttribute("class", "terms-wrapper");
     const chkBox = document.createElement("input");
     chkBox.setAttribute("type", "checkbox");
+    chkBox.id = "termChk";
+    chkBox.addEventListener("click", (e) => {
+      e.target.disabled = true;
+    });
     const terms = document.createElement("span");
     terms.innerText =
       "호두샵의 이용약관 및 개인정보처리방침에 대한 내용을 확인하였고 동의합니다.";
@@ -98,7 +158,16 @@ class Join extends Component {
     joinBtn.innerText = "가입하기";
     joinBtn.addEventListener("click", (e) => {
       e.defaultPrevented;
-      console.log(this.state);
+      const id = document.querySelector("#id").value;
+      const pw = document.querySelector("#pw").value;
+      const pwChk = document.querySelector("#pwChk").value;
+      const name = document.querySelector("#name").value;
+      const phone = document.querySelector("#phone").value;
+      const emailId = document.querySelector("#emailId").value;
+      const emailHost = document.querySelector("#emailHost").value;
+      const termChk = document.querySelector("#termChk").value;
+
+      console.log(id, pw, pwChk, name, phone, emailId, emailHost, termChk);
     });
 
     joinWrapper.append(joinTypeWrapper, joinArea, termsWrapper, joinBtn);
