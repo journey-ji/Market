@@ -39,7 +39,6 @@
   border-top-right-radius: 10px;
   background-color: #f2f2f2;
   border-bottom: none;
-  z-index: -100;
 }
 
 .join-wrapper .join-type-wrapper .customer-join.selected,

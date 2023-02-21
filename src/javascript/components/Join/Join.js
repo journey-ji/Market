@@ -1,5 +1,5 @@
 import { Component, createComponent } from "../../core/index.js";
-import { idCheckAPI } from "../../utils/api.js";
+import { idCheckAPI, signupAPI } from "../../utils/api.js";
 import Button from "../Button/Button.js";
 
 class Join extends Component {
@@ -8,6 +8,7 @@ class Join extends Component {
     this.state = {
       idChk: false,
       termChk: false,
+      isCustomer: true,
     };
   }
   render() {
@@ -23,15 +24,39 @@ class Join extends Component {
     const joinWrapper = document.createElement("div");
     joinWrapper.setAttribute("class", "join-wrapper");
 
+    /** 회원가입 타입 */
+
     const joinTypeWrapper = document.createElement("div");
     joinTypeWrapper.setAttribute("class", "join-type-wrapper");
 
-    const customerJoin = document.createElement("span");
+    const customerJoin = document.createElement("button");
     customerJoin.setAttribute("class", "customer-join");
+    customerJoin.type = "button";
     customerJoin.innerText = "구매회원 가입";
-    const sellerJoin = document.createElement("span");
+    customerJoin.addEventListener("click", () => {
+      console.log("customer 버튼 클릭");
+      if (!this.state.isCustomer) {
+        this.setState({ ...this.state, isCustomer: true });
+      }
+    });
+    const sellerJoin = document.createElement("button");
     sellerJoin.setAttribute("class", "seller-join");
+    sellerJoin.type = "button";
     sellerJoin.innerText = "판매회원 가입";
+    sellerJoin.addEventListener("click", () => {
+      console.log("seller버튼 클릭");
+      if (this.state.isCustomer) {
+        this.setState({ ...this.state, isCustomer: false });
+      }
+    });
+
+    if (this.state.isCustomer) {
+      customerJoin.classList.add("selected");
+      sellerJoin.classList.remove("selected");
+    } else {
+      sellerJoin.classList.add("selected");
+      customerJoin.classList.remove("selected");
+    }
 
     joinTypeWrapper.append(customerJoin, sellerJoin);
 
@@ -167,7 +192,31 @@ class Join extends Component {
       const emailHost = document.querySelector("#emailHost").value;
       const termChk = document.querySelector("#termChk").value;
 
+      phone = phone.replaceAll("-", "");
       console.log(id, pw, pwChk, name, phone, emailId, emailHost, termChk);
+      if (
+        id &&
+        pw &&
+        pwChk &&
+        name &&
+        phone &&
+        emailId &&
+        emailHost &&
+        termChk
+      ) {
+        signupAPI({
+          username: id,
+          password: pw,
+          password2: pwChk,
+          phone_number: phone,
+          name: name,
+        });
+        // "username": String, // 아이디
+        // "password": String,
+        // "password2": String,
+        // "phone_number": String, // 전화번호는 010으로 시작하는 10~11자리 숫자
+        // "name": String, // 이름
+      }
     });
 
     joinWrapper.append(joinTypeWrapper, joinArea, termsWrapper, joinBtn);
