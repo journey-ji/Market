@@ -76,4 +76,20 @@ export const signupSellerAPI = async (props) => {
   return response.json();
 };
 
-export const loginAPI = async (props) => {};
+export const loginAPI = async (props) => {
+  const response = await fetch(
+    `https://openmarket.weniv.co.kr/accounts/login/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: props.username, // 아이디
+        password: props.password,
+        login_type: props.login_type,
+      }),
+    }
+  );
+  return response.json();
+};

@@ -8,6 +8,9 @@ import cartImg from "../../../assets/icon-shopping-cart.svg";
 
 class TopNavBar extends Component {
   render() {
+    let isLogin = localStorage.getItem("loginToken");
+    console.log("로그인");
+    console.log(!!isLogin);
     const $navCont = document.createElement("nav");
     $navCont.classList.add("top-navbar");
 
@@ -76,12 +79,22 @@ class TopNavBar extends Component {
 
       const btnCont2 = document.createElement("a");
       btnCont2.setAttribute("class", "btn-cont");
-      btnCont2.setAttribute("href", "/join");
+      if (isLogin) {
+        btnCont2.setAttribute("href", "/");
+      } else {
+        btnCont2.setAttribute("href", "/login");
+      }
+
       const userBtn = document.createElement("img");
       userBtn.setAttribute("class", "user-btn");
       userBtn.setAttribute("src", userImg);
       const btnTxt2 = document.createElement("span");
-      btnTxt2.innerText = "마이페이지";
+      if (isLogin) {
+        btnTxt2.innerText = "마이페이지";
+      } else {
+        btnTxt2.innerText = "로그인";
+      }
+
       btnTxt2.setAttribute("class", "btn-txt");
       btnCont2.append(userBtn, btnTxt2);
 

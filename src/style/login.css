@@ -1,8 +1,9 @@
 html {
   height: 2000px;
 }
-.login-article {
+.login-form {
   width: 550px;
+  margin: 80px auto;
 }
 .logo {
   display: block;

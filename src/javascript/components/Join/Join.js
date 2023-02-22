@@ -337,6 +337,7 @@ class Join extends Component {
               res.store_name === store
             ) {
               alert("회원가입완료");
+              location.href = "/";
             } else {
               if (res.password[0]) {
                 alert(res.password[0]);
