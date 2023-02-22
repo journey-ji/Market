@@ -15,12 +15,65 @@ export const idCheckAPI = async (id) => {
   return response.json();
 };
 
+export const sellerChkAPI = async (regiNumber) => {
+  const response = await fetch(
+    `https://openmarket.weniv.co.kr/accounts/signup/valid/company_registration_number/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        company_registration_number: regiNumber,
+      }),
+    }
+  );
+
+  return response.json();
+};
+
 export const signupAPI = async (props) => {
   console.log(props);
-
-  // "username": String, // 아이디
-  // "password": String,
-  // "password2": String,
-  // "phone_number": String, // 전화번호는 010으로 시작하는 10~11자리 숫자
-  // "name": String, // 이름
+  const response = await fetch(
+    `https://openmarket.weniv.co.kr/accounts/signup/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: props.username, // 아이디
+        password: props.password,
+        password2: props.password2,
+        phone_number: props.phone_number,
+        name: props.name,
+      }),
+    }
+  );
+  return response.json();
 };
+
+export const signupSellerAPI = async (props) => {
+  console.log(props);
+  const response = await fetch(
+    `https://openmarket.weniv.co.kr/accounts/signup_seller/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: props.username, // 아이디
+        password: props.password,
+        password2: props.password2,
+        phone_number: props.phone_number,
+        name: props.name,
+        company_registration_number: props.company_registration_number,
+        store_name: props.store_name,
+      }),
+    }
+  );
+  return response.json();
+};
+
+export const loginAPI = async (props) => {};

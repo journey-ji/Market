@@ -74,20 +74,24 @@ input {
   gap: 10px;
   margin-top: 12px;
 }
-.id-wrapper {
+.id-wrapper,
+.regi-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.id-inp-wrapper {
+.id-inp-wrapper,
+.regi-inp-wrapper {
   display: flex;
   gap: 12px;
 }
-.id-inp-wrapper input {
+.id-inp-wrapper input,
+.regi-inp-wrapper input {
   width: 346px;
 }
-.id-wrapper button {
+.id-wrapper button,
+.regi-wrapper button {
   width: 122px;
   border-radius: 5px;
   background-color: #21bf48;
@@ -96,7 +100,8 @@ input {
   font-weight: bold;
 }
 
-.pw-wrapper {
+.pw-wrapper,
+.store-wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;

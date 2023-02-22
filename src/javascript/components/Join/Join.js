@@ -1,5 +1,10 @@
 import { Component, createComponent } from "../../core/index.js";
-import { idCheckAPI, signupAPI } from "../../utils/api.js";
+import {
+  idCheckAPI,
+  sellerChkAPI,
+  signupAPI,
+  signupSellerAPI,
+} from "../../utils/api.js";
 import Button from "../Button/Button.js";
 
 class Join extends Component {
@@ -9,13 +14,10 @@ class Join extends Component {
       idChk: false,
       termChk: false,
       isCustomer: true,
+      sellerChk: false,
     };
   }
   render() {
-    let chkList = {
-      id: false,
-      pw: false,
-    };
     const joinContainer = document.createElement("form");
     joinContainer.setAttribute("class", "join-form");
 
@@ -155,6 +157,41 @@ class Join extends Component {
 
     emailWrapper.append(emailLabel, emailInpWrapper);
 
+    /* 판매자 가입 추가 input */
+    const sellerNumberWrapper = document.createElement("div");
+    sellerNumberWrapper.setAttribute("class", "regi-wrapper");
+    const sellerNumberLabel = document.createElement("label");
+    sellerNumberLabel.innerText = "사업자 등록번호";
+
+    const sellerInpWrapper = document.createElement("div");
+    sellerInpWrapper.setAttribute("class", "regi-inp-wrapper");
+    const sellerInp = document.createElement("input");
+    sellerInp.id = "registration";
+    sellerInp.disabled = this.state.sellerChk ? true : false;
+    const sellerChkBtn = createComponent(Button, { txt: "인증" });
+    sellerChkBtn.setAttribute("type", "button");
+    sellerChkBtn.addEventListener("click", () => {
+      sellerChkAPI(sellerInp.value).then((res) => {
+        if (res.Success) {
+          document.querySelector("#registration").disabled = true;
+          alert(res.Success);
+        } else if (res.FAIL_Message) {
+          alert(res.FAIL_Message);
+        }
+      });
+    });
+    sellerInpWrapper.append(sellerInp, sellerChkBtn);
+    sellerNumberWrapper.append(sellerNumberLabel, sellerInpWrapper);
+
+    const storeWrapper = document.createElement("div");
+    storeWrapper.setAttribute("class", "store-wrapper");
+    const storeLabel = document.createElement("label");
+    storeLabel.innerText = "스토어 이름";
+    const storeInp = document.createElement("input");
+    storeInp.setAttribute("class", "store-inp");
+    storeInp.id = "store";
+    storeWrapper.append(storeLabel, storeInp);
+
     joinArea.append(
       idWrapper,
       pwWrapper,
@@ -162,6 +199,9 @@ class Join extends Component {
       phoneWrapper,
       emailWrapper
     );
+    if (!this.state.isCustomer) {
+      joinArea.append(sellerNumberWrapper, storeWrapper);
+    }
 
     const termsWrapper = document.createElement("div");
     termsWrapper.setAttribute("class", "terms-wrapper");
@@ -181,28 +221,58 @@ class Join extends Component {
     joinBtn.setAttribute("class", "join-btn");
     joinBtn.setAttribute("type", "button");
     joinBtn.innerText = "가입하기";
+
     joinBtn.addEventListener("click", (e) => {
+      let chkList = {
+        id: false,
+        pw: false,
+        term: false,
+      };
+
       e.defaultPrevented;
       const id = document.querySelector("#id").value;
       const pw = document.querySelector("#pw").value;
       const pwChk = document.querySelector("#pwChk").value;
       const name = document.querySelector("#name").value;
-      const phone = document.querySelector("#phone").value;
+      let phone = document.querySelector("#phone").value;
       const emailId = document.querySelector("#emailId").value;
       const emailHost = document.querySelector("#emailHost").value;
       const termChk = document.querySelector("#termChk").value;
+      const registration = document.querySelector("#registration").value;
+      const store = document.querySelector("#store").value;
 
+      if (pw === pwChk) {
+        chkList.pw = true;
+      } else {
+        chkList.pw = false;
+      }
+      if (document.querySelector("#id").disabled) {
+        chkList.id = true;
+      } else {
+        chkList.id = false;
+      }
+      if (document.querySelector("#termChk").disabled) {
+        chkList.term = true;
+      } else {
+        chkList.term = false;
+      }
+      console.log(chkList.pw);
+      console.log(document.querySelector("#id").disabled);
       phone = phone.replaceAll("-", "");
-      console.log(id, pw, pwChk, name, phone, emailId, emailHost, termChk);
-      if (
-        id &&
-        pw &&
-        pwChk &&
-        name &&
-        phone &&
-        emailId &&
-        emailHost &&
+      console.log(
+        chkList.id,
+        chkList.pw,
+        chkList.term,
+        phone,
+        emailId,
+        emailHost,
         termChk
+      );
+      if (
+        (chkList.id,
+        chkList.pw,
+        chkList.term,
+        name && phone && emailId && emailHost && this.state.isCustomer)
       ) {
         signupAPI({
           username: id,
@@ -210,12 +280,76 @@ class Join extends Component {
           password2: pwChk,
           phone_number: phone,
           name: name,
-        });
-        // "username": String, // 아이디
-        // "password": String,
-        // "password2": String,
-        // "phone_number": String, // 전화번호는 010으로 시작하는 10~11자리 숫자
-        // "name": String, // 이름
+        })
+          .then((res) => {
+            // 결과확인
+            // res.phone_number === phone
+            // res.name===name
+            /// res.username ===id
+            // 위 세개 충족하면 가입 완료
+            // 아니면 에러 출력
+            // res.password가 존재하면 해당 메시지 출력
+            //
+            if (
+              res.phone_number === phone &&
+              res.name === name &&
+              res.username === id
+            ) {
+              alert("회원가입완료");
+            } else {
+              if (res.password[0]) {
+                alert(res.password[0]);
+              } else if (res.phone_number[0]) {
+                alert(res.phone_number[0]);
+              }
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("에러 발생");
+          });
+      } else if (
+        (chkList.id,
+        chkList.pw,
+        chkList.term,
+        name &&
+          phone &&
+          emailId &&
+          emailHost &&
+          store &&
+          !this.state.isCustomer)
+      ) {
+        signupSellerAPI({
+          username: id, // 아이디
+          password: pw,
+          password2: pwChk,
+          phone_number: phone,
+          name: name,
+          company_registration_number: registration,
+          store_name: store,
+        })
+          .then((res) => {
+            if (
+              res.phone_number === phone &&
+              res.name === name &&
+              res.username === id &&
+              res.company_registration_number === registration &&
+              res.store_name === store
+            ) {
+              alert("회원가입완료");
+            } else {
+              if (res.password[0]) {
+                alert(res.password[0]);
+              } else if (res.phone_number[0]) {
+                alert(res.phone_number[0]);
+              } else if (res.store_name[0]) {
+                alert(res.store_name[0]);
+              }
+            }
+          })
+          .catch((err) => {
+            alert("에러 발생");
+          });
       }
     });
 
