@@ -1,5 +1,6 @@
 import { Component } from "../../core/index.js";
 import { loginAPI } from "../../utils/api.js";
+import { store } from "../../utils/store.js";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -68,10 +69,11 @@ class Login extends Component {
         password: pw.value,
         login_type: this.state.isCustomer ? "BUYER" : "SELLER",
       }).then((res) => {
-        console.log(res);
         if (res.id) {
-          localStorage.setItem("loginToken", res.token);
-          alert("로그인되었습니다.");
+          
+          localStorage.setItem("loginInfo",JSON.stringify({loginToken:res.token, loginType:this.state.isCustomer ? "BUYER" : "SELLER",}));
+          
+          alert(`로그인되었습니다.`);
           location.href = "/";
         }
       });

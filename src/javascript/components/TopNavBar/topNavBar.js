@@ -6,11 +6,29 @@ import selImg from "../../../assets/icon-shopping-bag.svg";
 import userImg from "../../../assets/icon-user.svg";
 import cartImg from "../../../assets/icon-shopping-cart.svg";
 
+
+/**
+ * isSeller인것을 알려야하는데 ,,
+ * 
+ */
+
+
 class TopNavBar extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      isLogin: !!JSON.parse(localStorage.getItem('loginInfo')) ?true:false,
+      loginType: JSON.parse(localStorage.getItem('loginInfo'))?.loginType||""
+    }
+  }
+  logout(){
+    localStorage.removeItem('loginInfo')
+    alert('로그아웃되었습니다.')
+    location.href='/'
+  }
   render() {
-    let isLogin = localStorage.getItem("loginToken");
-    console.log("로그인");
-    console.log(!!isLogin);
+    
+  
     const $navCont = document.createElement("nav");
     $navCont.classList.add("top-navbar");
 
@@ -39,15 +57,16 @@ class TopNavBar extends Component {
     rightCont.setAttribute("class", "right-cont");
 
     // 오른쪽 버튼
-    if (this.props.isSeller) {
+    if (this.state.loginType==='SELLER') {
       const btnCont = document.createElement("button");
       btnCont.setAttribute("class", "btn-cont");
       const userBtn = document.createElement("img");
       userBtn.setAttribute("class", "user-btn");
       userBtn.setAttribute("src", userImg);
       const btnTxt = document.createElement("span");
-      btnTxt.innerText = "마이페이지";
+      btnTxt.innerText = "로그아웃";
       btnTxt.setAttribute("class", "btn-txt");
+      btnCont.addEventListener('click',this.logout)
       btnCont.append(userBtn, btnTxt);
 
       const sellerCenter = createComponent(Button, {
@@ -75,11 +94,12 @@ class TopNavBar extends Component {
       const btnTxt = document.createElement("span");
       btnTxt.innerText = "장바구니";
       btnTxt.setAttribute("class", "btn-txt");
+      
       btnCont.append(cartBtn, btnTxt);
 
       const btnCont2 = document.createElement("a");
       btnCont2.setAttribute("class", "btn-cont");
-      if (isLogin) {
+      if (this.state.isLogin) {
         btnCont2.setAttribute("href", "/");
       } else {
         btnCont2.setAttribute("href", "/login");
@@ -89,13 +109,15 @@ class TopNavBar extends Component {
       userBtn.setAttribute("class", "user-btn");
       userBtn.setAttribute("src", userImg);
       const btnTxt2 = document.createElement("span");
-      if (isLogin) {
-        btnTxt2.innerText = "마이페이지";
+      if (this.state.isLogin) {
+        btnTxt2.innerText = "로그아웃";
+        btnCont2.addEventListener('click',this.logout)  
       } else {
         btnTxt2.innerText = "로그인";
       }
 
       btnTxt2.setAttribute("class", "btn-txt");
+      
       btnCont2.append(userBtn, btnTxt2);
 
       rightCont.append(btnCont, btnCont2);

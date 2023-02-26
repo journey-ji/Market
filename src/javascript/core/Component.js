@@ -1,3 +1,5 @@
+import { observable, observer } from "./observer";
+
 class Component {
   constructor(props) {
     this.props = props;
@@ -16,9 +18,10 @@ class Component {
   render() {}
   initialize() {
     const rendered = this.render();
-    this.lastRendered = rendered;
-    return rendered;
+      this.lastRendered = rendered;
+      return rendered;
   }
+  initState() { return {} }
 }
 
 export default Component;
