@@ -1,0 +1,25 @@
+.modal-wrapper {
+  position: fixed;
+  right: 50px;
+  top: 90px;
+}
+
+.modal-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 200px;
+  height: 70px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+}
+.modal-cont a,
+.modal-cont button {
+  font-size: 18px;
+  font-weight: 700;
+  background-color: white;
+}

@@ -73,6 +73,8 @@ class Login extends Component {
           localStorage.setItem("loginToken", res.token);
           alert("로그인되었습니다.");
           location.href = "/";
+        } else if (res.FAIL_Message) {
+          alert("로그인에 실패하였습니다.");
         }
       });
     });

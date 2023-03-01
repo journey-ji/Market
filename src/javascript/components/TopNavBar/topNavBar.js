@@ -5,6 +5,7 @@ import "./topNavBar.css";
 import selImg from "../../../assets/icon-shopping-bag.svg";
 import userImg from "../../../assets/icon-user.svg";
 import cartImg from "../../../assets/icon-shopping-cart.svg";
+import Modal from "./modal.js";
 
 class TopNavBar extends Component {
   render() {
@@ -69,6 +70,9 @@ class TopNavBar extends Component {
     } else {
       const btnCont = document.createElement("button");
       btnCont.setAttribute("class", "btn-cont");
+      btnCont.addEventListener("click", () => {
+        location.href = "/cart";
+      });
       const cartBtn = document.createElement("img");
       cartBtn.setAttribute("class", "cart-btn");
       cartBtn.setAttribute("src", cartImg);
@@ -77,13 +81,24 @@ class TopNavBar extends Component {
       btnTxt.setAttribute("class", "btn-txt");
       btnCont.append(cartBtn, btnTxt);
 
-      const btnCont2 = document.createElement("a");
+      const btnCont2 = document.createElement("button");
       btnCont2.setAttribute("class", "btn-cont");
-      if (isLogin) {
-        btnCont2.setAttribute("href", "/");
-      } else {
-        btnCont2.setAttribute("href", "/login");
-      }
+      btnCont2.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (!isLogin) {
+          location.href = "/login";
+        } else {
+          const modal = document.querySelector("#myPageModal");
+          if (modal.classList.contains("ir")) {
+            modal.classList.remove("ir");
+            document.body.style.overflow = "hidden";
+          } else {
+            modal.classList.add("ir");
+            document.body.style.overflow = "";
+          }
+        }
+      });
 
       const userBtn = document.createElement("img");
       userBtn.setAttribute("class", "user-btn");
@@ -101,8 +116,10 @@ class TopNavBar extends Component {
       rightCont.append(btnCont, btnCont2);
     }
 
+    const modal = createComponent(Modal, { isLogin: isLogin });
+
     $navWrapper.append(leftCont, rightCont);
-    $navCont.append($navWrapper);
+    $navCont.append(modal, $navWrapper);
     return $navCont;
   }
 }

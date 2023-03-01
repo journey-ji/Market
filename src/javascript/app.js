@@ -1,3 +1,4 @@
+import CartPage from "./pages/cartPage.js";
 import {
   MainPage,
   ProductDetail,
@@ -18,6 +19,7 @@ export default class App {
       "/": MainPage,
       "/join": JoinPage,
       "/login": LoginPage,
+      "/cart": CartPage,
       "/detail/:id": ProductDetail,
       "/products/:id": ProductDetail2,
       "/products/*": ProductDetail2,
