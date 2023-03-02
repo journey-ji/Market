@@ -97,7 +97,7 @@ class TopNavBar extends Component {
 
       btnCont.append(cartBtn, btnTxt);
 
-      const btnCont2 = document.createElement("button");
+      const btnCont2 = document.createElement("a");
       btnCont2.setAttribute("class", "btn-cont");
 
       if (this.state.isLogin) {
@@ -124,7 +124,7 @@ class TopNavBar extends Component {
       rightCont.append(btnCont, btnCont2);
     }
 
-    const modal = createComponent(Modal, { isLogin: isLogin });
+    const modal = createComponent(Modal, { isLogin: this.state.isLogin });
 
     $navWrapper.append(leftCont, rightCont);
     $navCont.append(modal, $navWrapper);
