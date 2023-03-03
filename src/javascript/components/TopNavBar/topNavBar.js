@@ -6,6 +6,7 @@ import selImg from "../../../assets/icon-shopping-bag.svg";
 import userImg from "../../../assets/icon-user.svg";
 import cartImg from "../../../assets/icon-shopping-cart.svg";
 import Modal from "./modal.js";
+import Logo from "../Logo/Logo.js";
 
 /**
  * isSeller인것을 알려야하는데 ,,
@@ -35,10 +36,21 @@ class TopNavBar extends Component {
     const leftCont = document.createElement("div");
     leftCont.setAttribute("class", "left-cont");
 
+    const LogoContainer = document.createElement("a");
+    LogoContainer.href = "/";
+
+    const testLogo = createComponent(Logo, {
+      width: "124px",
+      height: "38px",
+      margin: "26px 30px 26px 0px",
+    });
+
     const headerLogo = document.createElement("img");
     headerLogo.setAttribute("src", logo);
     headerLogo.setAttribute("alt", "헤더로고");
     headerLogo.setAttribute("class", "logo-img");
+
+    LogoContainer.append(testLogo);
 
     const inpCont = document.createElement("div");
     inpCont.setAttribute("class", "inp-cont");
@@ -48,7 +60,7 @@ class TopNavBar extends Component {
     const searchBtn = document.createElement("button");
     searchBtn.setAttribute("class", "search-btn");
     inpCont.append(searchInp, searchBtn);
-    leftCont.append(headerLogo, inpCont);
+    leftCont.append(LogoContainer, inpCont);
 
     const rightCont = document.createElement("div");
     rightCont.setAttribute("class", "right-cont");
@@ -80,6 +92,9 @@ class TopNavBar extends Component {
       sellerTxt.innerText = "판매자센터";
 
       // 이미지랑, span 붙여넣기
+      sellerCenter.addEventListener("click", () => {
+        location.href = "/seller";
+      });
       sellerCenter.append(sellerImg, sellerTxt);
       rightCont.append(btnCont, sellerCenter);
     } else {
@@ -124,10 +139,10 @@ class TopNavBar extends Component {
       rightCont.append(btnCont, btnCont2);
     }
 
-    const modal = createComponent(Modal, { isLogin: this.state.isLogin });
+    // const modal = createComponent(Modal, { isLogin: this.state.isLogin });
 
     $navWrapper.append(leftCont, rightCont);
-    $navCont.append(modal, $navWrapper);
+    $navCont.append($navWrapper);
     return $navCont;
   }
 }

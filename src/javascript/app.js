@@ -7,6 +7,7 @@ import {
   JoinPage,
 } from "./pages/index.js";
 import LoginPage from "./pages/loginPage.js";
+import SellerCenterPage from "./pages/sellerCenterPage.js";
 import { Router } from "./utils/index.js";
 
 export default class App {
@@ -20,6 +21,7 @@ export default class App {
       "/join": JoinPage,
       "/login": LoginPage,
       "/cart": CartPage,
+      "/seller": SellerCenterPage,
       "/detail/:id": ProductDetail,
       "/products/:id": ProductDetail2,
       "/products/*": ProductDetail2,

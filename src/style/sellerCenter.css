@@ -1,0 +1,22 @@
+.top-navbar {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+}
+
+.contents-wrapper {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.head-line-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 38px auto;
+}
+
+.side-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 30px;
+}

@@ -22,8 +22,11 @@ class ProductDetail2 extends Component {
   }
 
   render() {
+    window.scrollTo(0, 0);
+
     const pageContainer = document.createElement("div");
     pageContainer.setAttribute("class", "page-wrapper");
+    pageContainer.style.marginTop = "0px";
 
     const topNavBar = createComponent(TopNavBar, {
       isSeller: false,

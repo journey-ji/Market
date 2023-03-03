@@ -19,7 +19,6 @@ class MainProduct extends Component {
 
     const setProducts = () => {
       getProductsAPI().then((data) => {
-        console.log(data.results);
         for (let i = 0; i < data.results.length; i++) {
           const productContainer = document.createElement("li");
           productContainer.setAttribute("class", "content-item");

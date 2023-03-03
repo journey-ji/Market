@@ -5,6 +5,7 @@ const getProductsAPI = async () => {
       method: "GET",
     });
     const resJson = await res.json();
+    console.log(resJson);
     return resJson;
   } catch (err) {
     console.err(err);

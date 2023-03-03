@@ -30,6 +30,7 @@
 }
 .inp-cont .search-inp {
   width: auto;
+  height: 42px;
   border-style: none;
   outline: none;
   margin: 13px 22px;
