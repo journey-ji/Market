@@ -3,6 +3,12 @@ import TopNavBar from "../components/TopNavBar/topNavBar.js";
 import { Component, createComponent } from "../core/index.js";
 import "../../style/sellerCenter.css";
 class SellerCenterPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clickedItem: null,
+    };
+  }
   render() {
     const pageCont = document.createElement("div");
 
@@ -29,49 +35,53 @@ class SellerCenterPage extends Component {
     headLineContainer.append(tagContainer, productBtn);
 
     const contentContainer = document.createElement("div");
+    contentContainer.setAttribute("class", "content-container");
 
     // 여기는 각종 버튼들 보여주기
     const sideContainer = document.createElement("div");
     sideContainer.setAttribute("class", "side-container");
 
-    const sellingProductBtn = createComponent(Button, {
-      width: "250px",
-      height: "50px",
-      txt: "판매중인 상품",
-      isActive: true,
-    });
-    sellingProductBtn.style.textAlign = "left";
-    sellingProductBtn.style.padding = "15px 20px";
-    const shipmentBtn = createComponent(Button, {
-      width: "250px",
-      height: "50px",
-      txt: "주문/배송",
-      isActive: false,
-    });
-    shipmentBtn.style.textAlign = "left";
-    shipmentBtn.style.padding = "15px 20px";
+    const sellingProductBtn = document.createElement("button");
+    sellingProductBtn.type = "button";
+    sellingProductBtn.setAttribute("class", "side-btn clicked");
+    sellingProductBtn.innerText = "판매중인 상품";
 
-    const qnaBtn = createComponent(Button, {
-      width: "250px",
-      height: "50px",
-      txt: "문의/리뷰",
-      isActive: false,
-    });
-    qnaBtn.style.textAlign = "left";
-    qnaBtn.style.padding = "15px 20px";
-    const statBtn = createComponent(Button, {
-      width: "250px",
-      height: "50px",
-      txt: "통계",
-      isActive: false,
-    });
-    statBtn.style.textAlign = "left";
-    statBtn.style.padding = "15px 20px";
-    const settingBtn = createComponent(Button, {
-      width: "250px",
-      height: "50px",
-      txt: "스토어설정",
-      isActive: false,
+    const shipmentBtn = document.createElement("button");
+    shipmentBtn.type = "button";
+    shipmentBtn.setAttribute("class", "side-btn");
+    shipmentBtn.innerText = "주문 / 배송";
+
+    const qnaBtn = document.createElement("button");
+    qnaBtn.type = "button";
+    qnaBtn.setAttribute("class", "side-btn");
+    qnaBtn.innerText = "문의 / 리뷰";
+
+    const statBtn = document.createElement("button");
+    statBtn.type = "button";
+    statBtn.setAttribute("class", "side-btn");
+    statBtn.innerText = "통계";
+
+    const settingBtn = document.createElement("button");
+    settingBtn.type = "button";
+    settingBtn.setAttribute("class", "side-btn");
+    settingBtn.innerText = "스토어설정";
+
+    const btnList = [
+      sellingProductBtn,
+      shipmentBtn,
+      qnaBtn,
+      statBtn,
+      settingBtn,
+    ];
+    btnList.forEach((sideBtn) => {
+      sideBtn.addEventListener("click", (e) => {
+        e.target.classList.add("clicked");
+        btnList
+          .filter((item) => item !== e.target)
+          .forEach((btn) => {
+            btn.classList.remove("clicked");
+          });
+      });
     });
     settingBtn.style.textAlign = "left";
     settingBtn.style.padding = "15px 20px";
@@ -85,8 +95,10 @@ class SellerCenterPage extends Component {
 
     // 여기는 버튼에 따른 콘텐츠 보여주기
     const contentBody = document.createElement("div");
+    contentBody.setAttribute("class", "content-body");
 
     const listHead = document.createElement("div");
+    listHead.innerText = "판매중인 상품이 들어갈 영역";
 
     contentBody.append(listHead);
     contentContainer.append(sideContainer, contentBody);

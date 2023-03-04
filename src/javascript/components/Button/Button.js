@@ -8,9 +8,9 @@ class Button extends Component {
     btn.innerText = this.props.txt ? this.props.txt : "";
     btn.setAttribute("class", this.props.class);
 
-    btn.style.backgroundColor = this.props.isActive ? "#21BF48" : "white";
+    btn.style.backgroundColor = this.props.isUnactive ? "white" : "#21BF48";
     btn.style.borderRadius = "5px";
-    btn.style.color = this.props.isActive ? "white" : "black";
+    btn.style.color = this.props.isUnactive ? "black" : "white";
     btn.style.fontSize = "18px";
     btn.style.fontWeight = "500";
     return btn;
