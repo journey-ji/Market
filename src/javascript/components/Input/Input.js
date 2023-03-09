@@ -189,6 +189,13 @@ class Input extends Component {
       input.addEventListener("blur", this.onChangePwInp.bind(this));
 
       inputWrapper.append(span, input);
+    } else {
+      const span = document.createElement("span");
+      span.innerText = this.props?.txt;
+      const input = document.createElement("input");
+      input.setAttribute("class", this.props.class);
+
+      inputWrapper.append(span, input);
     }
 
     return inputWrapper;

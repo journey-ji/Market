@@ -28,8 +28,3 @@ class Modal extends Component {
 }
 
 export default Modal;
-// if (isLogin) {
-//   btnCont2.setAttribute("href", "/");
-// } else {
-//   btnCont2.setAttribute("href", "/login");
-// }

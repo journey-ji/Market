@@ -1,0 +1,42 @@
+.content-body {
+  display: flex;
+}
+
+.main-content {
+  display: flex;
+  height: 1254px;
+  gap: 40px;
+}
+
+.product-img-cont {
+  width: 380px;
+}
+.product-img {
+  width: 454px;
+  height: 454px;
+  background-color: gray;
+}
+
+.product-info-cont {
+  width: 826px;
+}
+
+.product-name {
+  width: 826px;
+  height: 54px;
+}
+.product-name::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  top: 100px;
+  left: 100px;
+  background-color: pink;
+  z-index: 10;
+}
+
+.product-price {
+  width: 220px;
+  height: 54px;
+}

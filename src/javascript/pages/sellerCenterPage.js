@@ -26,13 +26,16 @@ class SellerCenterPage extends Component {
     corpTag.innerText = "백엔드글로벌";
     tagContainer.append(contentTag, corpTag);
 
+    const btnCont = document.createElement("a");
+    btnCont.href = "/makeProduct";
     const productBtn = createComponent(Button, {
       width: "168px",
       height: "54px",
       txt: "상품업로드",
     });
+    btnCont.append(productBtn);
 
-    headLineContainer.append(tagContainer, productBtn);
+    headLineContainer.append(tagContainer, btnCont);
 
     const contentContainer = document.createElement("div");
     contentContainer.setAttribute("class", "content-container");
