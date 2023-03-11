@@ -34,12 +34,13 @@ class MakeProduct extends Component {
 
     const productName = createComponent(Input, {
       txt: "상품명",
-      class: "product-name",
+      class: "product-name-regi",
     });
+    productName.setAttribute('class',"product-name-regi")
 
     const productPrice = createComponent(Input, {
       txt: "판매가",
-      class: "product-price",
+      class: "product-price-regi",
     });
 
     productInfoCont.append(productName, productPrice);

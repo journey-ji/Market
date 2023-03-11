@@ -21,22 +21,21 @@
   width: 826px;
 }
 
-.product-name {
+.product-name-regi {
   width: 826px;
   height: 54px;
+  position: inherit;
 }
-.product-name::after {
+.product-name-regi::after {
   content: "";
-  display: inline-block;
+  position: absolute;
   width: 10px;
   height: 10px;
-  top: 100px;
-  left: 100px;
-  background-color: pink;
+  background-color: skyblue;
   z-index: 10;
 }
 
-.product-price {
+.product-price-regi {
   width: 220px;
   height: 54px;
 }
