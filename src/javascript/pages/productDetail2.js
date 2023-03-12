@@ -54,21 +54,25 @@ class ProductDetail2 extends Component {
       height: "60px",
       txt: "상세",
       class: "selected",
+      isUnactive: true,
     });
     const btn2 = createComponent(Button, {
       width: "320px",
       height: "60px",
       txt: "리뷰",
+      isUnactive: true,
     });
     const btn3 = createComponent(Button, {
       width: "320px",
       height: "60px",
       txt: "Q&A",
+      isUnactive: true,
     });
     const btn4 = createComponent(Button, {
       width: "320px",
       height: "60px",
       txt: "반품/교환정보",
+      isUnactive: true,
     });
 
     menuBtns.append(btn1, btn2, btn3, btn4);

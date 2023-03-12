@@ -1,5 +1,12 @@
 import { Component } from "../../core/index.js";
 
+/**
+ * 너비
+ * 높이
+ * 텍스트
+ * 클래스
+ * 활성여부
+ */
 class Button extends Component {
   render() {
     const btn = document.createElement("button");
