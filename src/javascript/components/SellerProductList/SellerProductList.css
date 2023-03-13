@@ -1,0 +1,23 @@
+.list-header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.list-header .info-span {
+  width: 600px;
+}
+.list-header .price-span {
+  width: 200px;
+}
+
+.list-header .update-span {
+  width: 100px;
+}
+.list-header .delete-span {
+  width: 100px;
+}

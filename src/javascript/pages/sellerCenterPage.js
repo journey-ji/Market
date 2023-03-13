@@ -2,6 +2,7 @@ import Button from "../components/Button/Button.js";
 import TopNavBar from "../components/TopNavBar/topNavBar.js";
 import { Component, createComponent } from "../core/index.js";
 import "../../style/sellerCenter.css";
+import SellerProductList from "../components/SellerProductList/SellerProductList.js";
 class SellerCenterPage extends Component {
   constructor(props) {
     super(props);
@@ -100,10 +101,9 @@ class SellerCenterPage extends Component {
     const contentBody = document.createElement("div");
     contentBody.setAttribute("class", "content-body");
 
-    const listHead = document.createElement("div");
-    listHead.innerText = "판매중인 상품이 들어갈 영역";
+    const productList = createComponent(SellerProductList);
 
-    contentBody.append(listHead);
+    contentBody.append(productList);
     contentContainer.append(sideContainer, contentBody);
 
     contentsWrapper.append(headLineContainer, contentContainer);

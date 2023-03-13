@@ -195,6 +195,14 @@ class Input extends Component {
       const input = document.createElement("input");
       input.setAttribute("class", this.props.class);
 
+      if (this.props.id) {
+        input.setAttribute("id", this.props.id);
+      }
+      if (this.props.onchange) {
+        input.addEventListener("change", (e) => {
+          this.props.onchange(e.target);
+        });
+      }
       inputWrapper.append(span, input);
     }
 
