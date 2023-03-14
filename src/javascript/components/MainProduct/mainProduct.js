@@ -3,10 +3,63 @@ import ProductName from "../Product/productName.js";
 import ProductPrice from "../Product/productPrice.js";
 import getProductsAPI from "./api.js";
 
+/**
+ *
+ */
 class MainProduct extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: 1,
+      isNext: false,
+    };
+  }
   getDataAPI() {}
+  setProducts = async (container, page) => {
+    const lastItem = await getProductsAPI(page).then((data) => {
+      console.log(data.next);
+      if (data.next === null) {
+        return false;
+      }
+      let lastItem;
+      for (let i = 0; i < data.results.length; i++) {
+        const productContainer = document.createElement("li");
+        productContainer.setAttribute("class", "content-item");
+        productContainer.setAttribute("id", `item-${i}`);
+
+        const productAnchor = document.createElement("a");
+        productAnchor.setAttribute(
+          "href",
+          `/products/${data.results[i].product_id}`
+        );
+
+        const $img = document.createElement("img");
+        $img.setAttribute("src", data.results[i].image);
+
+        const $seller = document.createElement("p");
+        $seller.innerText = data.results[i].store_name;
+
+        const $itemHeaderIr = createComponent(ProductName, {
+          name: data.results[i].product_name,
+        });
+
+        const $price = createComponent(ProductPrice, {
+          price: data.results[i].price,
+        });
+
+        productAnchor.append($img, $seller, $itemHeaderIr, $price);
+        productContainer.append(productAnchor);
+        lastItem = productContainer;
+        container.append(productContainer);
+      }
+      return lastItem;
+    });
+    return lastItem;
+  };
+
   render() {
-    console.log("메인페이지 상품");
+    let currentPage = 1;
+
     const contentWrap = document.createElement("div");
     contentWrap.setAttribute("class", "content-wrap");
 
@@ -17,40 +70,27 @@ class MainProduct extends Component {
     const ulContainer = document.createElement("ul");
     ulContainer.setAttribute("class", "main-product-list");
 
-    const setProducts = () => {
-      getProductsAPI().then((data) => {
-        for (let i = 0; i < data.results.length; i++) {
-          const productContainer = document.createElement("li");
-          productContainer.setAttribute("class", "content-item");
-
-          const productAnchor = document.createElement("a");
-          productAnchor.setAttribute(
-            "href",
-            `/products/${data.results[i].product_id}`
-          );
-
-          const $img = document.createElement("img");
-          $img.setAttribute("src", data.results[i].image);
-
-          const $seller = document.createElement("p");
-          $seller.innerText = data.results[i].store_name;
-
-          const $itemHeaderIr = createComponent(ProductName, {
-            name: data.results[i].product_name,
+    let observerOptions = {
+      threshold: 0.7,
+    };
+    let observer = new IntersectionObserver((entries, io) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          io.unobserve(entry.target);
+          this.setProducts(ulContainer, currentPage++).then((res) => {
+            if (res) {
+              io.observe(res);
+            }
           });
-
-          const $price = createComponent(ProductPrice, {
-            price: data.results[i].price,
-          });
-
-          productAnchor.append($img, $seller, $itemHeaderIr, $price);
-          productContainer.append(productAnchor);
-          ulContainer.append(productContainer);
         }
       });
-    };
-    setProducts();
-    for (let i = 0; i < 15; i++) {}
+    }, observerOptions);
+
+    this.setProducts(ulContainer, currentPage++).then((res) => {
+      if (res) {
+        observer.observe(res);
+      }
+    });
     contentWrap.append(contentHeaderIr, ulContainer);
     return contentWrap;
   }

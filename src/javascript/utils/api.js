@@ -33,7 +33,6 @@ export const sellerChkAPI = async (regiNumber) => {
 };
 
 export const signupAPI = async (props) => {
-  console.log(props);
   const response = await fetch(
     `https://openmarket.weniv.co.kr/accounts/signup/`,
     {
@@ -54,7 +53,6 @@ export const signupAPI = async (props) => {
 };
 
 export const signupSellerAPI = async (props) => {
-  console.log(props);
   const response = await fetch(
     `https://openmarket.weniv.co.kr/accounts/signup_seller/`,
     {
