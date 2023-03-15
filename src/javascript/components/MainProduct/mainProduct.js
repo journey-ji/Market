@@ -4,20 +4,12 @@ import ProductPrice from "../Product/productPrice.js";
 import getProductsAPI from "./api.js";
 
 /**
- *
+ * this.props.searchData
  */
 class MainProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPage: 1,
-      isNext: false,
-    };
-  }
   getDataAPI() {}
   setProducts = async (container, page) => {
     const lastItem = await getProductsAPI(page).then((data) => {
-      console.log(data.next);
       if (data.next === null) {
         return false;
       }
@@ -25,7 +17,6 @@ class MainProduct extends Component {
       for (let i = 0; i < data.results.length; i++) {
         const productContainer = document.createElement("li");
         productContainer.setAttribute("class", "content-item");
-        productContainer.setAttribute("id", `item-${i}`);
 
         const productAnchor = document.createElement("a");
         productAnchor.setAttribute(
@@ -57,6 +48,37 @@ class MainProduct extends Component {
     return lastItem;
   };
 
+  setSearchProducts = (container, data) => {
+    for (let i = 0; i < data.results.length; i++) {
+      const productContainer = document.createElement("li");
+      productContainer.setAttribute("class", "content-item");
+
+      const productAnchor = document.createElement("a");
+      productAnchor.setAttribute(
+        "href",
+        `/products/${data.results[i].product_id}`
+      );
+
+      const $img = document.createElement("img");
+      $img.setAttribute("src", data.results[i].image);
+
+      const $seller = document.createElement("p");
+      $seller.innerText = data.results[i].store_name;
+
+      const $itemHeaderIr = createComponent(ProductName, {
+        name: data.results[i].product_name,
+      });
+
+      const $price = createComponent(ProductPrice, {
+        price: data.results[i].price,
+      });
+
+      productAnchor.append($img, $seller, $itemHeaderIr, $price);
+      productContainer.append(productAnchor);
+      container.append(productContainer);
+    }
+  };
+
   render() {
     let currentPage = 1;
 
@@ -85,12 +107,17 @@ class MainProduct extends Component {
         }
       });
     }, observerOptions);
-
-    this.setProducts(ulContainer, currentPage++).then((res) => {
-      if (res) {
-        observer.observe(res);
-      }
-    });
+    console.log(this.props.searchData.count);
+    if (typeof this.props.searchData.count === "number") {
+      console.log(this.props.searchData);
+      this.setSearchProducts(ulContainer, this.props.searchData);
+    } else {
+      this.setProducts(ulContainer, currentPage++).then((res) => {
+        if (res) {
+          observer.observe(res);
+        }
+      });
+    }
     contentWrap.append(contentHeaderIr, ulContainer);
     return contentWrap;
   }

@@ -4,12 +4,24 @@ import TopNavBar from "../components/TopNavBar/topNavBar.js";
 import { Component, createComponent } from "../core/index.js";
 
 class MainPage extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      searchData: [],
+    };
+  }
   render() {
     const pageContainer = document.createElement("div");
 
-    const topNavBar = createComponent(TopNavBar, { isSeller: false });
+    const topNavBar = createComponent(TopNavBar, {
+      isSeller: false,
+      test: this.state.searchData,
+      setSearchData: this.setState.bind(this),
+    });
     const mainCarousel = createComponent(MainCarousel);
-    const mainProducts = createComponent(MainProduct);
+    const mainProducts = createComponent(MainProduct, {
+      searchData: this.state.searchData,
+    });
     pageContainer.append(topNavBar, mainCarousel, mainProducts);
     return pageContainer;
   }

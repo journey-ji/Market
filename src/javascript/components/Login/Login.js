@@ -53,6 +53,7 @@ class Login extends Component {
     idInp.id = "id";
     const pwInp = document.createElement("input");
     pwInp.setAttribute("class", "pw-inp");
+    pwInp.setAttribute("type", "password");
     pwInp.placeholder = "비밀번호";
     pwInp.id = "pw";
     const loginBtn = document.createElement("button");
@@ -70,9 +71,14 @@ class Login extends Component {
         login_type: this.state.isCustomer ? "BUYER" : "SELLER",
       }).then((res) => {
         if (res.id) {
-          
-          localStorage.setItem("loginInfo",JSON.stringify({loginToken:res.token, loginType:this.state.isCustomer ? "BUYER" : "SELLER",}));
-          
+          localStorage.setItem(
+            "loginInfo",
+            JSON.stringify({
+              loginToken: res.token,
+              loginType: this.state.isCustomer ? "BUYER" : "SELLER",
+            })
+          );
+
           alert(`로그인되었습니다.`);
           location.href = "/";
         } else if (res.FAIL_Message) {

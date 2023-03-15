@@ -138,3 +138,13 @@ export const deleteProductAPI = async (props) => {
   );
   return response.json();
 };
+
+export const searchProductsAPI = async (input) => {
+  const response = await fetch(
+    `https://openmarket.weniv.co.kr/products/?search=${input}`,
+    {
+      method: "GET",
+    }
+  );
+  return response.json();
+};

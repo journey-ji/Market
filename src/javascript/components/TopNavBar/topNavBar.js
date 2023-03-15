@@ -7,6 +7,8 @@ import userImg from "../../../assets/icon-user.svg";
 import cartImg from "../../../assets/icon-shopping-cart.svg";
 import Modal from "./modal.js";
 import Logo from "../Logo/Logo.js";
+import searchImage from "../../../assets/search-btn.png";
+import { searchProductsAPI } from "../../utils/api.js";
 
 /**
  * isSeller인것을 알려야하는데 ,,
@@ -20,6 +22,7 @@ class TopNavBar extends Component {
       isLogin: !!JSON.parse(localStorage.getItem("loginInfo")) ? true : false,
       loginType: JSON.parse(localStorage.getItem("loginInfo"))?.loginType || "",
     };
+    //this.props.setSearchData
   }
   logout() {
     localStorage.removeItem("loginInfo");
@@ -59,6 +62,17 @@ class TopNavBar extends Component {
     searchInp.placeholder = "상품을 검색해보세요!";
     const searchBtn = document.createElement("button");
     searchBtn.setAttribute("class", "search-btn");
+    const searchImg = document.createElement("img");
+    searchImg.setAttribute("src", searchImage);
+    searchBtn.append(searchImg);
+
+    searchBtn.addEventListener("click", () => {
+      if (searchInp.value !== "") {
+        searchProductsAPI(searchInp.value).then((res) => {
+          this.props.setSearchData({ searchData: res });
+        });
+      }
+    });
     inpCont.append(searchInp, searchBtn);
     leftCont.append(LogoContainer, inpCont);
 
