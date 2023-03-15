@@ -276,6 +276,7 @@ tr {
 .product-price {
   display: flex;
   align-items: center;
+  justify-content: left;
 }
 
 /* 상품 원가와 할인율 스타일 */

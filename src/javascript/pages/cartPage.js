@@ -1,10 +1,18 @@
-import { Component } from "../core/index.js";
+import { Component, createComponent } from "../core/index.js";
 import "../../style/cart.css";
+import TopNavBar from "../components/TopNavBar/topNavBar.js";
+import CartHeader from "../components/Cart/CartHeader.js";
+import CartContents from "../components/Cart/CartContents.js";
 
 class CartPage extends Component {
   render() {
     const pageWrapper = document.createElement("div");
+    pageWrapper.setAttribute("class", "page-wrapper");
 
+    const cartHeader = createComponent(CartHeader);
+    const cartContents = createComponent(CartContents);
+
+    pageWrapper.append(cartHeader, cartContents);
     return pageWrapper;
   }
 }

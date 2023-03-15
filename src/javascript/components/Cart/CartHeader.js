@@ -2,7 +2,15 @@ import { Component } from "../../core/index.js";
 
 class CartHeader extends Component {
   render() {
-    const contentsHeader = document.createElement("contents-header");
+    const contentsHeader = document.createElement("div");
+    contentsHeader.setAttribute("class", "contents-header");
+    contentsHeader.innerHTML = `<input type="checkbox" />
+    <p>상품정보</p>
+    <p>수량</p>
+    <p>상품금액</p>
+    `;
+
+    return contentsHeader;
   }
 }
 
