@@ -9,6 +9,7 @@ import Modal from "./modal.js";
 import Logo from "../Logo/Logo.js";
 import searchImage from "../../../assets/search-btn.png";
 import { searchProductsAPI } from "../../utils/api.js";
+import { debounceTime } from "rxjs";
 
 /**
  * isSeller인것을 알려야하는데 ,,
@@ -92,6 +93,8 @@ class TopNavBar extends Component {
       btnCont.addEventListener("click", this.logout);
       btnCont.append(userBtn, btnTxt);
 
+      const btnContainer = document.createElement("a");
+      btnContainer.setAttribute("href", "/seller");
       const sellerCenter = createComponent(Button, {
         width: "168px",
         height: "54px",
@@ -105,18 +108,14 @@ class TopNavBar extends Component {
       sellerTxt.setAttribute("class", "seller-txt");
       sellerTxt.innerText = "판매자센터";
 
-      // 이미지랑, span 붙여넣기
-      sellerCenter.addEventListener("click", () => {
-        location.href = "/seller";
-      });
       sellerCenter.append(sellerImg, sellerTxt);
-      rightCont.append(btnCont, sellerCenter);
+      btnContainer.append(sellerCenter);
+      rightCont.append(btnCont, btnContainer);
     } else {
-      const btnCont = document.createElement("button");
+      const btnCont = document.createElement("a");
+      btnCont.setAttribute("href", "/cart");
       btnCont.setAttribute("class", "btn-cont");
-      btnCont.addEventListener("click", () => {
-        location.href = "/cart";
-      });
+
       const cartBtn = document.createElement("img");
       cartBtn.setAttribute("class", "cart-btn");
       cartBtn.setAttribute("src", cartImg);
