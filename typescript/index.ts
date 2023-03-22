@@ -1,13 +1,11 @@
-interface Cal{
-    plus:(a:number,b:number)=>number;
-    minus:(a:number,b:number)=>number;
+namespace 네임1 {
+  export type Dog = string;
+}
+namespace 네임2 {
+  export interface Dog {
+    name: string;
+  }
 }
 
-let Calculator:Cal ={
-    plus(a, b) {
-        return a+b;
-    },
-    minus(a,b){
-        return a-b;
-    }
-}
+let dog1: 네임1.Dog = "bark";
+let dog2: 네임2.Dog = { name: "paw" };

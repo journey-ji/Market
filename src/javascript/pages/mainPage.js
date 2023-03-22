@@ -18,11 +18,11 @@ class MainPage extends Component {
       test: this.state.searchData,
       setSearchData: this.setState.bind(this),
     });
-    const mainCarousel = createComponent(MainCarousel);
+    // const mainCarousel = createComponent(MainCarousel);
     const mainProducts = createComponent(MainProduct, {
       searchData: this.state.searchData,
     });
-    pageContainer.append(topNavBar, mainCarousel, mainProducts);
+    pageContainer.append(topNavBar, mainProducts);
     return pageContainer;
   }
 }

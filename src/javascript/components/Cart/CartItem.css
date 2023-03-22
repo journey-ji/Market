@@ -1,0 +1,19 @@
+.sold-out {
+  position: relative;
+}
+.sold-out::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "품절";
+  width: 100%;
+  height: 100%;
+  color: red;
+  font-size: 36px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}

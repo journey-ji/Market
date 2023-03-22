@@ -31,6 +31,7 @@ class TopNavBar extends Component {
     location.href = "/";
   }
   render() {
+    console.log(this.state);
     const $navCont = document.createElement("nav");
     $navCont.classList.add("top-navbar");
 

@@ -89,10 +89,28 @@ class OrderForm extends Component {
     btnsContainer.setAttribute("class", "buy-container");
     const buyBtn = document.createElement("button");
     buyBtn.setAttribute("class", "buy-btn");
-
     buyBtn.innerText = "바로 구매";
+    buyBtn.setAttribute("type", "button");
+    const cartAddBtn = document.createElement("button");
+    cartAddBtn.setAttribute("class", "cart-btn");
+    cartAddBtn.innerText = "장바구니";
+    cartAddBtn.setAttribute("type", "button");
+    cartAddBtn.addEventListener("click", () => {
+      let curItems = JSON.parse(localStorage.getItem("cartItems"));
+      if (curItems && curItems?.length > 0) {
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify([...curItems, this.props.product.product_id])
+        );
+      } else {
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify([this.props.product.product_id])
+        );
+      }
+    });
 
-    btnsContainer.append(buyBtn);
+    btnsContainer.append(buyBtn, cartAddBtn);
 
     productOptionContainer.append(deliveryTitle, selectedProductContainer);
     orderForm.append(

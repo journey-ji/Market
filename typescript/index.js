@@ -1,8 +1,2 @@
-let Calculator = {
-    plus(a, b) {
-        return a + b;
-    },
-    minus(a, b) {
-        return a - b;
-    }
-};
+let dog1 = "bark";
+let dog2 = { name: "paw" };

@@ -1049,3 +1049,12 @@ margin-bottom 값을 다르게 합니다. (form에 이미 padding 10px이 설정
   font-weight: 700;
   border-radius: 5px;
 }
+.cart-btn {
+  width: 200px;
+  height: 60px;
+  margin-left: 14px;
+
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 5px;
+}

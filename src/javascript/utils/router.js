@@ -25,7 +25,7 @@ class Router {
 
     this.routing(window.location.pathname);
     window.addEventListener("DOMContentLoaded", () => {
-      console.log("fwef");
+      console.log("페이지로드성공");
     });
     window.addEventListener("click", (e) => {
       if (e.target.closest("a")) {
