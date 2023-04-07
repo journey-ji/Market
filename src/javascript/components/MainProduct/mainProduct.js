@@ -26,6 +26,7 @@ class MainProduct extends Component {
 
         const $img = document.createElement("img");
         $img.setAttribute("src", data.results[i].image);
+        $img.setAttribute('alt',`${data.results[i].ProductName}상품의 이미지입니다.`)
 
         const $seller = document.createElement("p");
         $seller.innerText = data.results[i].store_name;

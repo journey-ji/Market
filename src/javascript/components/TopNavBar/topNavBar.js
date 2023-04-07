@@ -64,8 +64,10 @@ class TopNavBar extends Component {
     searchInp.placeholder = "상품을 검색해보세요!";
     const searchBtn = document.createElement("button");
     searchBtn.setAttribute("class", "search-btn");
+    searchBtn.setAttribute('id','navbar-search-btn')
     const searchImg = document.createElement("img");
     searchImg.setAttribute("src", searchImage);
+    searchImg.setAttribute('alt',`탐색버튼 이미지입니다.`)
     searchBtn.append(searchImg);
 
     searchBtn.addEventListener("click", () => {
@@ -88,6 +90,7 @@ class TopNavBar extends Component {
       const userBtn = document.createElement("img");
       userBtn.setAttribute("class", "user-btn");
       userBtn.setAttribute("src", userImg);
+      userBtn.setAttribute('alt','로그인,로그아웃 버튼 이미지')
       const btnTxt = document.createElement("span");
       btnTxt.innerText = "로그아웃";
       btnTxt.setAttribute("class", "btn-txt");
@@ -104,6 +107,7 @@ class TopNavBar extends Component {
       const sellerImg = document.createElement("img");
       sellerImg.setAttribute("class", "seller-img");
       sellerImg.setAttribute("src", selImg);
+      sellerImg.setAttribute('alt','판매자센터 버튼 이미지')
 
       const sellerTxt = document.createElement("span");
       sellerTxt.setAttribute("class", "seller-txt");
@@ -120,6 +124,7 @@ class TopNavBar extends Component {
       const cartBtn = document.createElement("img");
       cartBtn.setAttribute("class", "cart-btn");
       cartBtn.setAttribute("src", cartImg);
+      cartBtn.setAttribute("alt", '장바구니 버튼 이미지');
       const btnTxt = document.createElement("span");
       btnTxt.innerText = "장바구니";
       btnTxt.setAttribute("class", "btn-txt");
@@ -138,11 +143,15 @@ class TopNavBar extends Component {
       const userBtn = document.createElement("img");
       userBtn.setAttribute("class", "user-btn");
       userBtn.setAttribute("src", userImg);
+      
       const btnTxt2 = document.createElement("span");
       if (this.state.isLogin) {
         btnTxt2.innerText = "로그아웃";
+        userBtn.setAttribute("alt", '로그아웃 버튼 이미지');
         btnCont2.addEventListener("click", this.logout);
+
       } else {
+        userBtn.setAttribute("alt", '로그인 버튼 이미지');
         btnTxt2.innerText = "로그인";
       }
 
