@@ -3,7 +3,7 @@ import min_img from "../../../assets/icon-minus-line.svg";
 import plus_img from "../../../assets/icon-plus-line.svg";
 import "./CartContents.css";
 import { getProductAPI, getProductsAPI } from "../../utils/api.js";
-import QuantityInput from "../ProductOrder/quantityInput.js";
+import { QuantityInput } from "../ProductOrder/index.js";
 import CartItem from "./CartItem.js";
 class CartContents extends Component {
   constructor() {
