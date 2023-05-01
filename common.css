@@ -70,7 +70,9 @@
   min-width: 400px;
   height: 46px;
   margin: auto 0;
-  border: 2px solid #21bf48;
+  /* border: 2px solid #21bf48; */
+  border: 2px solid #858cbc;
+
   align-items: center;
   flex-grow: 1;
   flex-shrink: 1;
@@ -107,6 +109,7 @@
 .btn-cont .cart-btn {
   width: 32px;
   height: 32px;
+  margin: 0 auto;
 }
 .btn-cont .btn-txt {
   font-size: 12px;
@@ -121,7 +124,8 @@
 .seller-center-btn {
   display: flex;
   justify-content: space-between;
-  background-color: #21bf48;
+  /* background-color: #21bf48; */
+  background-color: #858cbc;
   border-radius: 5px;
   margin-left: 30px;
   color: white;
@@ -165,6 +169,10 @@
   background-color: white;
 }
 
+.logo-img{
+    object-fit: contain;
+    
+}
 .join-article {
   width: 550px;
 }
@@ -261,7 +269,7 @@ input {
 .regi-wrapper button {
   width: 122px;
   border-radius: 5px;
-  background-color: #21bf48;
+  background-color: var(--main-color);
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -325,7 +333,7 @@ input {
   width: 122px;
   height: 60px;
   border-radius: 5px;
-  background-color: #21bf48;
+  background-color: var(--main-color);
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -395,14 +403,14 @@ input {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #21bf48;
+  border: 2px solid var(--main-color);
   margin: 20px 30px;
   appearance: none;
 }
 .contents-header input:checked {
   width: 20px;
   height: 20px;
-  background-color: #21bf48;
+  background-color: var(--main-color);
 }
 
 /*
@@ -434,7 +442,7 @@ input {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #21bf48;
+  border: 2px solid var(--main-color);
   margin: auto 30px;
   appearance: none;
 }
@@ -490,7 +498,7 @@ input {
   height: 40px;
   border-radius: 5px;
   color: white;
-  background-color: #21bf48;
+  background-color: var(--main-color);
   font-size: 16px;
 }
 .cart-total-price {
@@ -536,7 +544,7 @@ input {
   width: 220px;
   height: 68px;
   border-radius: 5px;
-  background-color: #21bf48;
+  background-color: var(--main-color);
   color: white;
   font-size: 24px;
   font-weight: bold;
@@ -636,7 +644,7 @@ input {
 }
 
 .side-btn.clicked {
-  background-color: #21bf48;
+  background-color: var(--main-color);
   color: white;
 }
 .side-btn:hover:not(.clicked) {
@@ -887,7 +895,7 @@ html {
 
 .login-btn {
   height: 60px;
-  background-color: #21bf48;
+  background-color: var(--main-color);
   outline: none;
   border: none;
   border-radius: 5px;
@@ -905,27 +913,6 @@ html {
   color: #333;
   margin: 0 10px;
 }
-
-/* 
-    <main>
-      <h1 class = 'ir header'>호두</h1>
-      <div class='login-wrapper'>
-        <div class='login-type-wrapper'>  
-          <span class='customer-login'>구매회원 로그인</span>
-          <span class='seller-login'>판매회원 로그인</span>
-        </div>
-        <div class='login-area'>
-          <input type="text" placeholder="아이디" />
-          <input type="text" placeholder="비밀번호" />
-          <button type="button">로그인</button>
-        </div>
-      </div>
-      <div class="etc-wrapper">
-        <a href="">회원가입</a>
-        <a href="">비밀번호 찾기</a>
-      </div>
-    </main>
-     */
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -1132,7 +1119,7 @@ body {
 @charset "utf-8";
 
 :root {
-  --main-color: #6327fe;
+  --main-color: #858cbc;
   --txt-color: #333333;
   --border-color: #c4c4c4;
   --sub-border-color: #e0e0e0;
@@ -2164,15 +2151,15 @@ margin-bottom 값을 다르게 합니다. (form에 이미 padding 10px이 설정
 }
 
 .menu-wrapper .menu-btn button.selected {
-  border-color: #21bf48;
-  color: #21bf48;
+  border-color: #858cbc;
+  color: #858cbc;
 }
 
 .buy-btn {
   width: 416px;
   height: 60px;
   color: white;
-  background-color: #21bf48;
+  background-color: #858cbc;
   font-size: 18px;
   font-weight: 700;
   border-radius: 5px;
