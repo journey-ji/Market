@@ -7,7 +7,7 @@ import userImg from "../../../assets/icon-user.svg";
 import cartImg from "../../../assets/icon-shopping-cart.svg";
 import Modal from "./modal.js";
 import Logo from "../Logo/Logo.js";
-import searchImage from "../../../assets/search-btn.png";
+import searchImage from "../../../assets/search-btn.svg";
 import { searchProductsAPI } from "../../utils/api.js";
 import { debounceTime } from "rxjs";
 
@@ -44,11 +44,18 @@ class TopNavBar extends Component {
     const LogoContainer = document.createElement("a");
     LogoContainer.href = "/";
 
+    // const testLogo = createComponent(Logo, {
+    //   width: "124px",
+    //   height: "38px",
+    //   margin: "26px 30px 26px 0px",
+    // });
+
     const testLogo = createComponent(Logo, {
       width: "124px",
-      height: "38px",
-      margin: "26px 30px 26px 0px",
+      height: "90px",
+      margin: "0px",
     });
+
 
     const headerLogo = document.createElement("img");
     headerLogo.setAttribute("src", logo);

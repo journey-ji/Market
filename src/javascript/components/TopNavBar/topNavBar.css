@@ -23,7 +23,9 @@
   min-width: 400px;
   height: 46px;
   margin: auto 0;
-  border: 2px solid #21bf48;
+  /* border: 2px solid #21bf48; */
+  border: 2px solid #858cbc;
+
   align-items: center;
   flex-grow: 1;
   flex-shrink: 1;
@@ -74,7 +76,8 @@
 .seller-center-btn {
   display: flex;
   justify-content: space-between;
-  background-color: #21bf48;
+  /* background-color: #21bf48; */
+  background-color:  #858cbc;
   border-radius: 5px;
   margin-left: 30px;
   color: white;
