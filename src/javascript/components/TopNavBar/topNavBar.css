@@ -62,6 +62,7 @@
 .btn-cont .cart-btn {
   width: 32px;
   height: 32px;
+  margin: 0 auto;
 }
 .btn-cont .btn-txt {
   font-size: 12px;
@@ -77,7 +78,7 @@
   display: flex;
   justify-content: space-between;
   /* background-color: #21bf48; */
-  background-color:  #858cbc;
+  background-color: #858cbc;
   border-radius: 5px;
   margin-left: 30px;
   color: white;

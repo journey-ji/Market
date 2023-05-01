@@ -36,7 +36,7 @@
 }
 
 .side-btn.clicked {
-  background-color: #21bf48;
+  background-color: var(--main-color);
   color: white;
 }
 .side-btn:hover:not(.clicked) {

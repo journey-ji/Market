@@ -4,7 +4,7 @@
 @import "../javascript/components/TopNavBar/topNavBar.css";
 
 :root {
-  --main-color: #6327fe;
+  --main-color: #858cbc;
   --txt-color: #333333;
   --border-color: #c4c4c4;
   --sub-border-color: #e0e0e0;
@@ -1036,15 +1036,15 @@ margin-bottom 값을 다르게 합니다. (form에 이미 padding 10px이 설정
 }
 
 .menu-wrapper .menu-btn button.selected {
-  border-color: #21bf48;
-  color: #21bf48;
+  border-color: #858cbc;
+  color: #858cbc;
 }
 
 .buy-btn {
   width: 416px;
   height: 60px;
   color: white;
-  background-color: #21bf48;
+  background-color: #858cbc;
   font-size: 18px;
   font-weight: 700;
   border-radius: 5px;

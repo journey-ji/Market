@@ -30,14 +30,14 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #21bf48;
+  border: 2px solid var(--main-color);
   margin: 20px 30px;
   appearance: none;
 }
 .contents-header input:checked {
   width: 20px;
   height: 20px;
-  background-color: #21bf48;
+  background-color: var(--main-color);
 }
 
 /*
@@ -69,7 +69,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #21bf48;
+  border: 2px solid var(--main-color);
   margin: auto 30px;
   appearance: none;
 }
@@ -125,7 +125,7 @@
   height: 40px;
   border-radius: 5px;
   color: white;
-  background-color: #21bf48;
+  background-color: var(--main-color);
   font-size: 16px;
 }
 .cart-total-price {
@@ -171,7 +171,7 @@
   width: 220px;
   height: 68px;
   border-radius: 5px;
-  background-color: #21bf48;
+  background-color: var(--main-color);
   color: white;
   font-size: 24px;
   font-weight: bold;
